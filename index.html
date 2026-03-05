@@ -294,14 +294,131 @@
   .note-block li { margin-bottom: 0.3rem; }
 
   .formula-box {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 0.9rem 1.2rem;
+    background: #fff;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
     margin: 1rem 0;
     font-family: 'DM Mono', monospace;
-    font-size: 0.85rem;
-    color: #333;
+    font-size: 0.82rem;
+    color: #1a1a1a;
+    line-height: 1.9;
+    position: relative;
+  }
+
+  .formula-box::before {
+    content: 'Formula';
+    position: absolute;
+    top: -0.6rem;
+    left: 1rem;
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.1rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  /* Individual formula row styling */
+  .formula-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 1.2rem;
+    margin: 0.4rem 0;
+    background: #fff;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+  }
+
+  .formula-row .f-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #999;
+    white-space: nowrap;
+    min-width: 80px;
+  }
+
+  .formula-row .f-eq {
+    color: #1a1a1a;
+    font-weight: 500;
+    flex: 1;
+  }
+
+  .formula-card {
+    border: 1.5px solid #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem 0;
+  }
+
+  .formula-card .fc-title {
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+  }
+
+  .formula-card .fc-body {
+    padding: 0.8rem 1.2rem;
+    background: #fff;
+  }
+
+  .formula-card .fc-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.83rem;
+  }
+
+  .formula-card .fc-line:last-child { border-bottom: none; }
+
+  .formula-card .fc-sym {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    color: #1a1a1a;
+    min-width: 60px;
+  }
+
+  .formula-card .fc-def {
+    color: #555;
+    font-size: 0.82rem;
+  }
+
+  /* ===== SVG DIAGRAM STYLES ===== */
+  .diagram-wrap {
+    margin: 1.2rem 0;
+    background: #fff;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .diagram-wrap .diag-title {
+    background: #f3f3f1;
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #555;
+  }
+
+  .diagram-wrap svg {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   .key-term {
@@ -725,7 +842,7 @@
       <div class="sidebar-item" onclick="showNote('intl2', this)">💱 Exchange Rates</div>
 
       <div class="sidebar-label">Current Events</div>
-      <div class="sidebar-item" onclick="showNote('current1', this)">📰 Key Topics 2024–25</div>
+      <div class="sidebar-item" onclick="showNote('current1', this)">📰 Key Topics 2025–26</div>
     </aside>
 
     <div class="study-content">
@@ -738,33 +855,143 @@
         </div>
         <div class="note-block">
           <h3>⬆️ The Law of Demand</h3>
-          <p>As price increases, quantity demanded decreases (inverse relationship), ceteris paribus. The demand curve slopes downward.</p>
-          <p style="margin-top:.6rem"><strong>Demand Shifters (TRIBE):</strong></p>
+          <p>As price increases, quantity demanded decreases (inverse relationship), ceteris paribus. The demand curve slopes downward due to two effects:</p>
           <ul>
-            <li><span class="key-term">T</span>astes & preferences</li>
-            <li><span class="key-term">R</span>elated goods prices (substitutes & complements)</li>
-            <li><span class="key-term">I</span>ncome of buyers</li>
-            <li><span class="key-term">B</span>uyers (number of buyers in market)</li>
-            <li><span class="key-term">E</span>xpectations of future prices</li>
+            <li><span class="key-term">Substitution effect:</span> As the price of a good rises, consumers substitute cheaper alternatives</li>
+            <li><span class="key-term">Income effect:</span> A higher price reduces real purchasing power, so consumers buy less</li>
+            <li><span class="key-term">Law of Diminishing Marginal Utility:</span> Each additional unit consumed provides less satisfaction, so consumers only buy more at lower prices</li>
           </ul>
+          <p style="margin-top:.8rem"><strong>Demand Shifters — TRIBE (shift the entire curve, not just movement along it):</strong></p>
+          <ul>
+            <li><span class="key-term">T</span>astes & preferences — e.g., a health trend increases demand for organic food</li>
+            <li><span class="key-term">R</span>elated goods — if complement price rises, demand falls; if substitute price rises, demand increases</li>
+            <li><span class="key-term">I</span>ncome — normal goods: demand rises with income; inferior goods: demand falls</li>
+            <li><span class="key-term">B</span>uyers — more consumers in a market shifts demand right</li>
+            <li><span class="key-term">E</span>xpectations — if consumers expect higher future prices, they buy more now (shifts right)</li>
+          </ul>
+          <div class="tip-box">💡 <strong>Key distinction:</strong> A change in price causes a <em>movement along</em> the demand curve (change in quantity demanded). A change in any other factor <em>shifts</em> the curve (change in demand).</div>
         </div>
         <div class="note-block">
           <h3>⬇️ The Law of Supply</h3>
-          <p>As price increases, quantity supplied increases (positive relationship). The supply curve slopes upward.</p>
-          <p style="margin-top:.6rem"><strong>Supply Shifters (ROTTEN):</strong></p>
+          <p>As price increases, quantity supplied increases (positive relationship). The supply curve slopes upward because higher prices make production more profitable, incentivizing more output.</p>
+          <p style="margin-top:.8rem"><strong>Supply Shifters — ROTTEN:</strong></p>
           <ul>
-            <li><span class="key-term">R</span>esource costs (input prices)</li>
-            <li><span class="key-term">O</span>ther goods' prices (opportunity cost)</li>
-            <li><span class="key-term">T</span>echnology improvements</li>
-            <li><span class="key-term">T</span>axes & subsidies</li>
-            <li><span class="key-term">E</span>xpectations of sellers</li>
-            <li><span class="key-term">N</span>umber of sellers</li>
+            <li><span class="key-term">R</span>esource/input costs — rising wages or raw material costs shift supply left (decrease supply)</li>
+            <li><span class="key-term">O</span>ther goods' prices — if a related good becomes more profitable to produce, supply of this good falls</li>
+            <li><span class="key-term">T</span>echnology — improvements lower production costs, shift supply right</li>
+            <li><span class="key-term">T</span>axes & subsidies — taxes increase costs (shift left); subsidies decrease costs (shift right)</li>
+            <li><span class="key-term">E</span>xpectations — if sellers expect higher future prices, they may withhold supply now</li>
+            <li><span class="key-term">N</span>umber of sellers — more producers = greater market supply (shift right)</li>
           </ul>
         </div>
         <div class="note-block">
           <h3>⚖️ Market Equilibrium</h3>
-          <p>Equilibrium is where quantity demanded = quantity supplied. The price at this intersection is the <span class="key-term">equilibrium price</span> (market-clearing price).</p>
-          <div class="tip-box">💡 <strong>Surplus:</strong> Price too high → Qs > Qd. Price falls back to equilibrium.<br><strong>Shortage:</strong> Price too low → Qd > Qs. Price rises back to equilibrium.</div>
+          <p>Equilibrium occurs where Qd = Qs — the <span class="key-term">market-clearing price</span>. At this point, there is no tendency for price to change.</p>
+          <ul>
+            <li><span class="key-term">Surplus (excess supply):</span> Price above equilibrium → Qs > Qd → downward pressure on price</li>
+            <li><span class="key-term">Shortage (excess demand):</span> Price below equilibrium → Qd > Qs → upward pressure on price</li>
+          </ul>
+          <div class="diagram-wrap">
+            <div class="diag-title">Supply & Demand — Market Equilibrium</div>
+            <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="padding:16px;background:#fff;">
+              <!-- Axes -->
+              <line x1="50" y1="260" x2="390" y2="260" stroke="#1a1a1a" stroke-width="2"/>
+              <line x1="50" y1="260" x2="50" y2="20" stroke="#1a1a1a" stroke-width="2"/>
+              <!-- Axis arrows -->
+              <polygon points="390,257 397,260 390,263" fill="#1a1a1a"/>
+              <polygon points="47,20 50,13 53,20" fill="#1a1a1a"/>
+              <!-- Axis labels -->
+              <text x="395" y="264" font-family="DM Mono,monospace" font-size="11" fill="#1a1a1a">Q</text>
+              <text x="36" y="16" font-family="DM Mono,monospace" font-size="11" fill="#1a1a1a">P</text>
+              <!-- Demand curve (downward slope) -->
+              <line x1="80" y1="50" x2="360" y2="240" stroke="#c0392b" stroke-width="2.5"/>
+              <text x="362" y="243" font-family="DM Mono,monospace" font-size="12" fill="#c0392b" font-weight="bold">D</text>
+              <!-- Supply curve (upward slope) -->
+              <line x1="80" y1="240" x2="360" y2="50" stroke="#2d7a4f" stroke-width="2.5"/>
+              <text x="362" y="53" font-family="DM Mono,monospace" font-size="12" fill="#2d7a4f" font-weight="bold">S</text>
+              <!-- Equilibrium point -->
+              <circle cx="220" cy="145" r="5" fill="#1a1a1a"/>
+              <!-- Dashed lines to axes -->
+              <line x1="50" y1="145" x2="220" y2="145" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4"/>
+              <line x1="220" y1="145" x2="220" y2="260" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4"/>
+              <!-- Labels -->
+              <text x="28" y="149" font-family="DM Mono,monospace" font-size="11" fill="#1a1a1a">P*</text>
+              <text x="214" y="276" font-family="DM Mono,monospace" font-size="11" fill="#1a1a1a">Q*</text>
+              <text x="226" y="138" font-family="DM Sans,sans-serif" font-size="11" fill="#1a1a1a">Equilibrium</text>
+              <!-- Surplus label -->
+              <text x="240" y="100" font-family="DM Sans,sans-serif" font-size="10" fill="#c0392b">← Surplus (P too high)</text>
+              <!-- Shortage label -->
+              <text x="70" y="210" font-family="DM Sans,sans-serif" font-size="10" fill="#2d7a4f">Shortage (P too low) →</text>
+            </svg>
+          </div>
+          <div class="formula-card">
+            <div class="fc-title">Equilibrium Shift Rules</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">D↑ (right)</span><span class="fc-def">→ P* rises, Q* rises</span></div>
+              <div class="fc-line"><span class="fc-sym">D↓ (left)</span><span class="fc-def">→ P* falls, Q* falls</span></div>
+              <div class="fc-line"><span class="fc-sym">S↑ (right)</span><span class="fc-def">→ P* falls, Q* rises</span></div>
+              <div class="fc-line"><span class="fc-sym">S↓ (left)</span><span class="fc-def">→ P* rises, Q* falls</span></div>
+              <div class="fc-line"><span class="fc-sym">Both shift</span><span class="fc-def">One of P* or Q* becomes indeterminate without magnitudes</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="note-block">
+          <h3>🧮 Consumer & Producer Surplus</h3>
+          <ul>
+            <li><span class="key-term">Consumer surplus:</span> The difference between what consumers are willing to pay and what they actually pay. Area above price, below demand curve.</li>
+            <li><span class="key-term">Producer surplus:</span> The difference between the price producers receive and their minimum acceptable price. Area below price, above supply curve.</li>
+            <li><span class="key-term">Total surplus (social welfare):</span> Consumer surplus + Producer surplus. Maximized at competitive equilibrium.</li>
+            <li><span class="key-term">Deadweight loss:</span> Loss of total surplus when output deviates from equilibrium quantity (caused by price controls, taxes, monopoly)</li>
+          </ul>
+          <div class="diagram-wrap">
+            <div class="diag-title">Consumer & Producer Surplus</div>
+            <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="padding:16px;background:#fff;">
+              <line x1="50" y1="260" x2="390" y2="260" stroke="#1a1a1a" stroke-width="2"/>
+              <line x1="50" y1="260" x2="50" y2="20" stroke="#1a1a1a" stroke-width="2"/>
+              <polygon points="390,257 397,260 390,263" fill="#1a1a1a"/>
+              <polygon points="47,20 50,13 53,20" fill="#1a1a1a"/>
+              <text x="395" y="264" font-family="DM Mono,monospace" font-size="11" fill="#1a1a1a">Q</text>
+              <text x="36" y="16" font-family="DM Mono,monospace" font-size="11" fill="#1a1a1a">P</text>
+              <!-- Consumer surplus triangle (blue shading) -->
+              <polygon points="50,50 220,145 50,145" fill="rgba(56,130,200,0.15)" stroke="none"/>
+              <!-- Producer surplus triangle (green shading) -->
+              <polygon points="50,145 220,145 50,240" fill="rgba(45,122,79,0.15)" stroke="none"/>
+              <!-- Demand curve -->
+              <line x1="50" y1="50" x2="360" y2="240" stroke="#c0392b" stroke-width="2.5"/>
+              <text x="362" y="243" font-family="DM Mono,monospace" font-size="12" fill="#c0392b" font-weight="bold">D</text>
+              <!-- Supply curve -->
+              <line x1="50" y1="240" x2="360" y2="50" stroke="#2d7a4f" stroke-width="2.5"/>
+              <text x="362" y="53" font-family="DM Mono,monospace" font-size="12" fill="#2d7a4f" font-weight="bold">S</text>
+              <!-- Equilibrium -->
+              <circle cx="205" cy="145" r="4" fill="#1a1a1a"/>
+              <line x1="50" y1="145" x2="205" y2="145" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4"/>
+              <line x1="205" y1="145" x2="205" y2="260" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4"/>
+              <text x="28" y="149" font-family="DM Mono,monospace" font-size="11" fill="#1a1a1a">P*</text>
+              <text x="199" y="276" font-family="DM Mono,monospace" font-size="11" fill="#1a1a1a">Q*</text>
+              <!-- Labels -->
+              <text x="80" y="115" font-family="DM Sans,sans-serif" font-size="11" fill="#3882c8" font-weight="600">Consumer</text>
+              <text x="80" y="128" font-family="DM Sans,sans-serif" font-size="11" fill="#3882c8" font-weight="600">Surplus</text>
+              <text x="70" y="180" font-family="DM Sans,sans-serif" font-size="11" fill="#2d7a4f" font-weight="600">Producer</text>
+              <text x="70" y="193" font-family="DM Sans,sans-serif" font-size="11" fill="#2d7a4f" font-weight="600">Surplus</text>
+            </svg>
+          </div>
+        </div>
+        <div class="note-block">
+          <h3>🏷️ Price Controls</h3>
+          <ul>
+            <li><span class="key-term">Price ceiling:</span> A legally imposed maximum price set <em>below</em> equilibrium. Creates a persistent shortage. Example: rent control. Helps buyers in the short run but reduces quantity and quality over time.</li>
+            <li><span class="key-term">Price floor:</span> A legally imposed minimum price set <em>above</em> equilibrium. Creates a persistent surplus. Example: minimum wage creates unemployment (surplus of labor). Agricultural price floors create crop surpluses.</li>
+          </ul>
+          <div class="tip-box">💡 Both price controls create deadweight loss and reduce market efficiency. Ceilings → shortages. Floors → surpluses.</div>
+        </div>
+        <div class="note-block">
+          <h3>💸 Taxes & Subsidies (Wedge Analysis)</h3>
+          <ul>
+            <li>A per-unit <span class="key-term">tax</span> drives a wedge between the price buyers pay and the price sellers receive. Quantity falls, deadweight loss is created.</li>
+            <li><span class="key-term">Tax incidence:</span> Who actually bears the burden depends on elasticity — the less elastic side bears more of the tax burden.</li>
+            <li>A <span class="key-term">subsidy</span> works in reverse — lowers the price buyers pay, raises seller revenue, increases quantity above equilibrium (can also create inefficiency).</li>
+          </ul>
+          <div class="formula-box">Tax burden on buyers = (Price buyers pay) − (Original equilibrium price)<br>Tax burden on sellers = (Original equilibrium price) − (Price sellers receive)</div>
         </div>
       </div>
 
@@ -776,30 +1003,94 @@
         </div>
         <div class="note-block">
           <h3>📐 Price Elasticity of Demand (PED)</h3>
-          <p>Measures how responsive quantity demanded is to a price change.</p>
-          <div class="formula-box">PED = % Change in Quantity Demanded ÷ % Change in Price</div>
+          <p>Measures how responsive quantity demanded is to a change in price. Always use absolute value.</p>
+          <div class="formula-card">
+            <div class="fc-title">Price Elasticity of Demand</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">PED</span><span class="fc-def">= |% ΔQd ÷ % ΔP|</span></div>
+              <div class="fc-line"><span class="fc-sym">Midpoint</span><span class="fc-def">= [(Q₂−Q₁)/((Q₁+Q₂)/2)] ÷ [(P₂−P₁)/((P₁+P₂)/2)]</span></div>
+            </div>
+          </div>
           <ul>
-            <li>|PED| > 1 → <span class="key-term">Elastic</span> (luxury goods, many substitutes)</li>
-            <li>|PED| &lt; 1 → <span class="key-term">Inelastic</span> (necessities, few substitutes)</li>
-            <li>|PED| = 1 → <span class="key-term">Unit elastic</span></li>
+            <li>|PED| > 1 → <span class="key-term">Elastic</span>: consumers are sensitive to price. % change in Qd > % change in P</li>
+            <li>|PED| < 1 → <span class="key-term">Inelastic</span>: consumers are insensitive to price. % change in Qd < % change in P</li>
+            <li>|PED| = 1 → <span class="key-term">Unit elastic</span>: % change in Qd = % change in P</li>
+            <li>|PED| = 0 → <span class="key-term">Perfectly inelastic</span>: vertical demand curve (e.g., insulin)</li>
+            <li>|PED| = ∞ → <span class="key-term">Perfectly elastic</span>: horizontal demand curve (price-taking firms in perfect competition)</li>
+          </ul>
+          <div class="diagram-wrap">
+            <div class="diag-title">Elastic vs. Inelastic Demand Curves</div>
+            <svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="padding:14px 16px;background:#fff;">
+              <text x="90" y="16" font-family="DM Sans,sans-serif" font-size="11" fill="#555" text-anchor="middle">Elastic (flat slope)</text>
+              <line x1="30" y1="200" x2="162" y2="200" stroke="#1a1a1a" stroke-width="1.5"/>
+              <line x1="30" y1="200" x2="30" y2="25" stroke="#1a1a1a" stroke-width="1.5"/>
+              <polygon points="162,197 168,200 162,203" fill="#1a1a1a"/>
+              <polygon points="27,25 30,19 33,25" fill="#1a1a1a"/>
+              <text x="170" y="204" font-family="DM Mono,monospace" font-size="10" fill="#555">Q</text>
+              <text x="20" y="20" font-family="DM Mono,monospace" font-size="10" fill="#555">P</text>
+              <line x1="40" y1="120" x2="155" y2="88" stroke="#c0392b" stroke-width="2.5"/>
+              <text x="157" y="88" font-family="DM Mono,monospace" font-size="11" fill="#c0392b" font-weight="bold">D</text>
+              <text x="55" y="172" font-family="DM Sans,sans-serif" font-size="10" fill="#888">|PED| &gt; 1</text>
+              <text x="320" y="16" font-family="DM Sans,sans-serif" font-size="11" fill="#555" text-anchor="middle">Inelastic (steep slope)</text>
+              <line x1="252" y1="200" x2="392" y2="200" stroke="#1a1a1a" stroke-width="1.5"/>
+              <line x1="252" y1="200" x2="252" y2="25" stroke="#1a1a1a" stroke-width="1.5"/>
+              <polygon points="392,197 398,200 392,203" fill="#1a1a1a"/>
+              <polygon points="249,25 252,19 255,25" fill="#1a1a1a"/>
+              <text x="400" y="204" font-family="DM Mono,monospace" font-size="10" fill="#555">Q</text>
+              <text x="242" y="20" font-family="DM Mono,monospace" font-size="10" fill="#555">P</text>
+              <line x1="312" y1="38" x2="332" y2="195" stroke="#c0392b" stroke-width="2.5"/>
+              <text x="334" y="195" font-family="DM Mono,monospace" font-size="11" fill="#c0392b" font-weight="bold">D</text>
+              <text x="272" y="172" font-family="DM Sans,sans-serif" font-size="10" fill="#888">|PED| &lt; 1</text>
+            </svg>
+          </div>
+        </div>
+        <div class="note-block">
+          <h3>📦 Determinants of Price Elasticity of Demand</h3>
+          <ul>
+            <li><strong>Availability of substitutes:</strong> More substitutes = more elastic (e.g., Pepsi vs. a life-saving drug)</li>
+            <li><strong>Necessity vs. luxury:</strong> Necessities (insulin, gas) tend to be inelastic; luxuries (vacations, jewelry) tend to be elastic</li>
+            <li><strong>Time horizon:</strong> Demand becomes more elastic over time as consumers find alternatives (e.g., fuel efficiency cars in response to high gas prices)</li>
+            <li><strong>Proportion of income:</strong> Goods that consume a large share of income tend to be more elastic (housing vs. salt)</li>
+            <li><strong>Narrowness of definition:</strong> "Food" is inelastic; "McDonald's hamburgers" is elastic because many substitutes exist</li>
           </ul>
         </div>
         <div class="note-block">
-          <h3>📦 Determinants of Elasticity</h3>
+          <h3>💰 Elasticity & Total Revenue</h3>
+          <p>Total Revenue (TR) = Price × Quantity. Elasticity determines how TR responds to a price change:</p>
           <ul>
-            <li>Number of substitutes (more = more elastic)</li>
-            <li>Necessity vs. luxury (necessities = inelastic)</li>
-            <li>Time horizon (longer = more elastic)</li>
-            <li>Proportion of income spent (higher proportion = more elastic)</li>
+            <li><strong>Elastic demand:</strong> Price ↑ → TR ↓ (Qd falls proportionally more than price rises)</li>
+            <li><strong>Inelastic demand:</strong> Price ↑ → TR ↑ (Qd falls proportionally less than price rises)</li>
+            <li><strong>Unit elastic:</strong> Price change has no effect on TR</li>
+          </ul>
+          <div class="tip-box">💡 This is why drug companies and utilities can raise prices (inelastic) and still make more revenue, but airlines offering sales (elastic) increase revenue by lowering prices.</div>
+        </div>
+        <div class="note-block">
+          <h3>📊 Price Elasticity of Supply (PES)</h3>
+          <div class="formula-card">
+            <div class="fc-title">Price Elasticity of Supply</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">PES</span><span class="fc-def">= % ΔQs ÷ % ΔP</span></div>
+              <div class="fc-line"><span class="fc-sym">PES &gt; 1</span><span class="fc-def">Elastic — producers ramp output easily</span></div>
+              <div class="fc-line"><span class="fc-sym">PES &lt; 1</span><span class="fc-def">Inelastic — hard to increase output quickly (e.g., beachfront land)</span></div>
+            </div>
+          </div>
+          <ul>
+            <li>Key determinant: <strong>time</strong> — supply is more elastic in the long run as producers can adjust capacity</li>
           </ul>
         </div>
         <div class="note-block">
-          <h3>📊 Income Elasticity</h3>
-          <div class="formula-box">YED = % Change in Demand ÷ % Change in Income</div>
-          <ul>
-            <li>YED > 0 → <span class="key-term">Normal good</span> (demand rises with income)</li>
-            <li>YED &lt; 0 → <span class="key-term">Inferior good</span> (demand falls with income)</li>
-          </ul>
+          <h3>📈 Income & Cross-Price Elasticity</h3>
+          <div class="formula-card">
+            <div class="fc-title">Income & Cross-Price Elasticity</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">YED</span><span class="fc-def">= % ΔDemand ÷ % ΔIncome</span></div>
+              <div class="fc-line"><span class="fc-sym">XED</span><span class="fc-def">= % ΔDemand for Good A ÷ % ΔPrice of Good B</span></div>
+              <div class="fc-line"><span class="fc-sym">YED &gt; 0</span><span class="fc-def">Normal good (demand ↑ with income)</span></div>
+              <div class="fc-line"><span class="fc-sym">YED &lt; 0</span><span class="fc-def">Inferior good (demand ↓ with income)</span></div>
+              <div class="fc-line"><span class="fc-sym">XED &gt; 0</span><span class="fc-def">Substitutes (Coke & Pepsi)</span></div>
+              <div class="fc-line"><span class="fc-sym">XED &lt; 0</span><span class="fc-def">Complements (cars & gas)</span></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -812,29 +1103,116 @@
         <div class="note-block">
           <h3>🏆 Perfect Competition</h3>
           <ul>
-            <li>Many buyers and sellers</li>
-            <li>Identical (homogeneous) products</li>
-            <li>Free entry and exit</li>
-            <li>Price takers — firms have no pricing power</li>
-            <li>Long-run: zero economic profit</li>
+            <li>Many buyers and sellers; no single firm influences price</li>
+            <li>Identical (homogeneous) products — no differentiation</li>
+            <li>Perfect information for all participants</li>
+            <li>Free entry and exit in the long run</li>
+            <li>Firms are <span class="key-term">price takers</span> — they face a perfectly elastic (horizontal) demand curve at the market price</li>
+            <li><strong>Short run:</strong> Firms can earn economic profit, break even, or suffer losses</li>
+            <li><strong>Long run:</strong> Entry/exit eliminates economic profit → firms earn zero economic profit (but still earn normal/accounting profit)</li>
+            <li>Produces at <span class="key-term">allocative efficiency</span> (P = MC) and <span class="key-term">productive efficiency</span> (P = min ATC)</li>
           </ul>
+          <div class="formula-card">
+            <div class="fc-title">Profit Maximization Rule (All Firms)</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">All firms</span><span class="fc-def">Produce where MR = MC</span></div>
+              <div class="fc-line"><span class="fc-sym">Perf. Comp.</span><span class="fc-def">P = MR, so produce where P = MC</span></div>
+              <div class="fc-line"><span class="fc-sym">Economic π</span><span class="fc-def">= (P − ATC) × Q</span></div>
+            </div>
+          </div>
         </div>
         <div class="note-block">
           <h3>👑 Monopoly</h3>
           <ul>
-            <li>Single seller controls the entire market</li>
+            <li>Single seller — the firm IS the market; faces the downward-sloping market demand curve</li>
             <li>Unique product with no close substitutes</li>
-            <li>High barriers to entry</li>
-            <li>Price maker — sets price above competitive level</li>
-            <li>Results in <span class="key-term">deadweight loss</span></li>
+            <li>Significant <span class="key-term">barriers to entry:</span> patents, economies of scale (natural monopoly), control of key resources, government licensing</li>
+            <li><span class="key-term">Price maker</span> — chooses price by choosing output level on the demand curve</li>
+            <li>MR < P (to sell more, the monopolist must lower price on all units)</li>
+            <li>Produces where MR = MC, then charges the price from the demand curve above that output</li>
+            <li>Results in <span class="key-term">deadweight loss</span> — underproduces relative to competitive outcome</li>
+            <li>NOT allocatively or productively efficient: P > MC and P > min ATC</li>
+          </ul>
+          <div class="diagram-wrap">
+            <div class="diag-title">Monopoly — Profit Maximization & Deadweight Loss</div>
+            <svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" style="padding:16px;background:#fff;">
+              <line x1="50" y1="265" x2="410" y2="265" stroke="#1a1a1a" stroke-width="2"/>
+              <line x1="50" y1="265" x2="50" y2="20" stroke="#1a1a1a" stroke-width="2"/>
+              <polygon points="410,262 417,265 410,268" fill="#1a1a1a"/>
+              <polygon points="47,20 50,14 53,20" fill="#1a1a1a"/>
+              <text x="415" y="269" font-family="DM Mono,monospace" font-size="10" fill="#1a1a1a">Q</text>
+              <text x="36" y="17" font-family="DM Mono,monospace" font-size="10" fill="#1a1a1a">P</text>
+              <!-- Demand curve -->
+              <line x1="70" y1="40" x2="390" y2="250" stroke="#c0392b" stroke-width="2"/>
+              <text x="392" y="252" font-family="DM Mono,monospace" font-size="11" fill="#c0392b" font-weight="bold">D</text>
+              <!-- MR curve (steeper, hits x-axis at midpoint of demand x-intercept) -->
+              <line x1="70" y1="40" x2="230" y2="265" stroke="#3882c8" stroke-width="2" stroke-dasharray="6,3"/>
+              <text x="232" y="263" font-family="DM Mono,monospace" font-size="11" fill="#3882c8" font-weight="bold">MR</text>
+              <!-- MC curve (upward sloping) -->
+              <line x1="70" y1="220" x2="380" y2="80" stroke="#2d7a4f" stroke-width="2"/>
+              <text x="382" y="80" font-family="DM Mono,monospace" font-size="11" fill="#2d7a4f" font-weight="bold">MC</text>
+              <!-- MR=MC intersection at Qm -->
+              <circle cx="175" cy="178" r="4" fill="#1a1a1a"/>
+              <!-- Qm vertical line -->
+              <line x1="175" y1="178" x2="175" y2="265" stroke="#999" stroke-width="1.2" stroke-dasharray="4,3"/>
+              <text x="169" y="278" font-family="DM Mono,monospace" font-size="10" fill="#1a1a1a">Qm</text>
+              <!-- Pm price from demand at Qm -->
+              <line x1="175" y1="116" x2="50" y2="116" stroke="#999" stroke-width="1.2" stroke-dasharray="4,3"/>
+              <circle cx="175" cy="116" r="4" fill="#c0392b"/>
+              <text x="28" y="120" font-family="DM Mono,monospace" font-size="10" fill="#1a1a1a">Pm</text>
+              <!-- Pc competitive price (where MC=D) -->
+              <line x1="260" y1="155" x2="50" y2="155" stroke="#999" stroke-width="1" stroke-dasharray="3,3"/>
+              <circle cx="260" cy="155" r="3" fill="#2d7a4f"/>
+              <text x="28" y="159" font-family="DM Mono,monospace" font-size="10" fill="#2d7a4f">Pc</text>
+              <line x1="260" y1="155" x2="260" y2="265" stroke="#999" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="253" y="278" font-family="DM Mono,monospace" font-size="10" fill="#2d7a4f">Qc</text>
+              <!-- Deadweight loss triangle shading -->
+              <polygon points="175,116 260,155 175,178" fill="rgba(248,113,113,0.25)" stroke="none"/>
+              <text x="192" y="152" font-family="DM Sans,sans-serif" font-size="9" fill="#c0392b">DWL</text>
+              <!-- Profit box -->
+              <rect x="50" y="116" width="125" height="39" fill="rgba(56,130,200,0.12)" stroke="#3882c8" stroke-width="1" stroke-dasharray="3,2"/>
+              <text x="82" y="140" font-family="DM Sans,sans-serif" font-size="9" fill="#3882c8">Monopoly Profit</text>
+              <!-- Label -->
+              <text x="300" y="40" font-family="DM Sans,sans-serif" font-size="10" fill="#888">MR = MC → choose Qm</text>
+              <text x="300" y="54" font-family="DM Sans,sans-serif" font-size="10" fill="#888">price from D curve → Pm</text>
+            </svg>
+          </div>
+          <div class="tip-box">💡 <strong>Price discrimination:</strong> A monopolist charging different prices to different customers (e.g., airline seats, student discounts) can capture more consumer surplus and reduce deadweight loss.</div>
+        </div>
+        <div class="note-block">
+          <h3>🍕 Monopolistic Competition</h3>
+          <ul>
+            <li>Many firms selling <span class="key-term">differentiated products</span> (perceived differences via branding, quality, location)</li>
+            <li>Low barriers to entry and exit</li>
+            <li>Each firm has some pricing power (slight downward-sloping demand), but faces strong competition</li>
+            <li><strong>Short run:</strong> Can earn economic profit (attracts new entrants)</li>
+            <li><strong>Long run:</strong> New entry drives profits to zero, like perfect competition</li>
+            <li>Excess capacity in long run — firms don't produce at minimum ATC (some productive inefficiency)</li>
+            <li>Examples: restaurants, clothing brands, hair salons</li>
           </ul>
         </div>
         <div class="note-block">
-          <h3>🤝 Oligopoly & Monopolistic Competition</h3>
+          <h3>🤝 Oligopoly</h3>
           <ul>
-            <li><strong>Oligopoly:</strong> Few large firms, interdependent pricing, high barriers (e.g., airlines, telecom)</li>
-            <li><strong>Monopolistic competition:</strong> Many firms, differentiated products, easy entry/exit (e.g., restaurants)</li>
+            <li>Few large firms dominate the market; each firm has significant market power</li>
+            <li>High barriers to entry (capital costs, brand loyalty, economies of scale)</li>
+            <li><span class="key-term">Interdependence:</span> Each firm's decisions affect and are affected by competitors — must anticipate rivals' responses</li>
+            <li><span class="key-term">Collusion & cartels:</span> Firms may agree to fix prices and act like a monopoly (e.g., OPEC). Illegal in the US (antitrust law).</li>
+            <li><span class="key-term">Game theory:</span> Firms use strategic thinking; the prisoner's dilemma explains why cartels tend to break down</li>
+            <li>Examples: airlines, major tech firms, auto manufacturers, oil companies</li>
           </ul>
+        </div>
+        <div class="note-block">
+          <h3>📊 Market Structure Comparison</h3>
+          <div class="formula-card">
+            <div class="fc-title">Market Structure Comparison</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">Perf. Comp.</span><span class="fc-def">Many firms | Homogeneous | Price taker | P=MC | Zero LR profit</span></div>
+              <div class="fc-line"><span class="fc-sym">Mono. Comp.</span><span class="fc-def">Many firms | Differentiated | Some power | P>MC | Zero LR profit</span></div>
+              <div class="fc-line"><span class="fc-sym">Oligopoly</span><span class="fc-def">Few firms | Diff/Homo | Price maker | P>MC | Possible LR profit</span></div>
+              <div class="fc-line"><span class="fc-sym">Monopoly</span><span class="fc-def">One firm | Unique | Price maker | P>MC | Possible LR profit</span></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -842,30 +1220,66 @@
       <div class="note-section" id="note-micro4">
         <div class="note-header">
           <span class="note-tag">Microeconomics</span>
-          <h2>Consumer Theory</h2>
+          <h2>Consumer Theory & Market Failures</h2>
         </div>
         <div class="note-block">
-          <h3>😊 Utility</h3>
-          <p><span class="key-term">Utility</span> is the satisfaction a consumer gets from a good or service.</p>
+          <h3>😊 Utility & Marginal Analysis</h3>
+          <p><span class="key-term">Utility</span> is the satisfaction or benefit a consumer receives from consuming a good or service.</p>
           <ul>
-            <li><strong>Marginal Utility (MU):</strong> Additional satisfaction from consuming one more unit</li>
-            <li><strong>Law of Diminishing Marginal Utility:</strong> Each additional unit consumed gives less additional satisfaction</li>
+            <li><span class="key-term">Total Utility (TU):</span> Total satisfaction from all units consumed</li>
+            <li><span class="key-term">Marginal Utility (MU):</span> Additional satisfaction from consuming one more unit. MU = ΔTU / ΔQ</li>
+            <li><span class="key-term">Law of Diminishing Marginal Utility:</span> As consumption increases, each additional unit provides less additional utility. Explains why demand curves slope downward.</li>
+          </ul>
+          <div class="formula-box">Utility-maximizing rule: MU₁/P₁ = MU₂/P₂ (allocate spending so last dollar spent on each good gives equal marginal utility)</div>
+        </div>
+        <div class="note-block">
+          <h3>💼 Costs of Production</h3>
+          <ul>
+            <li><span class="key-term">Explicit costs:</span> Direct monetary payments (wages, rent, materials)</li>
+            <li><span class="key-term">Implicit costs:</span> Opportunity costs of using owned resources (e.g., foregone salary of owner)</li>
+            <li><span class="key-term">Economic profit</span> = Total Revenue − (Explicit + Implicit costs)</li>
+            <li><span class="key-term">Accounting profit</span> = Total Revenue − Explicit costs only</li>
+            <li><span class="key-term">Normal profit:</span> Zero economic profit — the firm is covering all opportunity costs, just enough to stay in business</li>
+          </ul>
+          <div class="formula-card">
+            <div class="fc-title">Cost Formulas</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">TC</span><span class="fc-def">= Fixed Costs (FC) + Variable Costs (VC)</span></div>
+              <div class="fc-line"><span class="fc-sym">MC</span><span class="fc-def">= ΔTC ÷ ΔQ  (change in total cost per extra unit)</span></div>
+              <div class="fc-line"><span class="fc-sym">ATC</span><span class="fc-def">= TC ÷ Q  (average total cost)</span></div>
+              <div class="fc-line"><span class="fc-sym">AFC</span><span class="fc-def">= FC ÷ Q  (falls as Q rises)</span></div>
+              <div class="fc-line"><span class="fc-sym">AVC</span><span class="fc-def">= VC ÷ Q</span></div>
+              <div class="fc-line"><span class="fc-sym">Econ. π</span><span class="fc-def">= TR − (Explicit + Implicit costs)</span></div>
+            </div>
+          </div>
+          <div class="tip-box">💡 The MC curve intersects the ATC and AVC curves at their minimum points. When MC < ATC, ATC is falling. When MC > ATC, ATC is rising.</div>
+        </div>
+        <div class="note-block">
+          <h3>📏 Returns to Scale & Economies of Scale</h3>
+          <ul>
+            <li><span class="key-term">Economies of scale:</span> As output increases, long-run ATC falls (e.g., specialization, bulk purchasing). Reason large firms dominate some industries.</li>
+            <li><span class="key-term">Diseconomies of scale:</span> As output grows too large, long-run ATC rises (coordination problems, bureaucracy)</li>
+            <li><span class="key-term">Constant returns to scale:</span> Long-run ATC stays flat as output grows</li>
+            <li><span class="key-term">Natural monopoly:</span> Industry where one firm can serve the entire market at lower cost than multiple firms due to very large economies of scale (e.g., utilities, water)</li>
           </ul>
         </div>
         <div class="note-block">
-          <h3>🔄 Substitution & Income Effects</h3>
+          <h3>🌍 Externalities & Market Failures</h3>
+          <p>A <span class="key-term">market failure</span> occurs when the free market does not allocate resources efficiently. Major causes:</p>
           <ul>
-            <li><strong>Substitution effect:</strong> When price rises, consumers switch to cheaper substitutes</li>
-            <li><strong>Income effect:</strong> When price rises, purchasing power falls → buy less</li>
+            <li><span class="key-term">Negative externality:</span> A cost imposed on a third party not involved in the transaction (e.g., pollution). Market overproduces — MSC > MPC. Government fix: tax (Pigouvian tax) or regulation.</li>
+            <li><span class="key-term">Positive externality:</span> A benefit received by a third party (e.g., education, vaccination). Market underproduces — MSB > MPB. Government fix: subsidy or public provision.</li>
+            <li><span class="key-term">Public goods:</span> Non-excludable and non-rival (e.g., national defense, lighthouses). Subject to free-rider problem → private market underprovides.</li>
+            <li><span class="key-term">Asymmetric information:</span> When one party has more information than another (e.g., used cars — "lemons problem", health insurance — adverse selection)</li>
           </ul>
-        </div>
-        <div class="note-block">
-          <h3>🏷️ Price Controls</h3>
-          <ul>
-            <li><span class="key-term">Price ceiling</span>: Maximum legal price (below equilibrium → shortage). E.g., rent control</li>
-            <li><span class="key-term">Price floor</span>: Minimum legal price (above equilibrium → surplus). E.g., minimum wage</li>
-          </ul>
-          <div class="tip-box">💡 Remember: ceilings are below equilibrium (cause shortages), floors are above equilibrium (cause surpluses).</div>
+          <div class="formula-card">
+            <div class="fc-title">Externality Rules</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">Social opt.</span><span class="fc-def">MSB = MSC (Marginal Social Benefit = Marginal Social Cost)</span></div>
+              <div class="fc-line"><span class="fc-sym">Neg. ext.</span><span class="fc-def">MPC &lt; MSC → market overproduces → fix with tax</span></div>
+              <div class="fc-line"><span class="fc-sym">Pos. ext.</span><span class="fc-def">MPB &lt; MSB → market underproduces → fix with subsidy</span></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -877,27 +1291,135 @@
         </div>
         <div class="note-block">
           <h3>📊 Gross Domestic Product (GDP)</h3>
-          <p><span class="key-term">GDP</span> is the total market value of all final goods and services produced in a country in one year.</p>
-          <div class="formula-box">GDP = C + I + G + (X − M)</div>
+          <p><span class="key-term">GDP</span> is the total market value of all <em>final</em> goods and services produced within a country's borders in a given time period.</p>
           <ul>
-            <li><strong>C</strong> = Consumer spending (largest component ~70%)</li>
-            <li><strong>I</strong> = Investment (business spending on capital)</li>
-            <li><strong>G</strong> = Government spending</li>
-            <li><strong>X − M</strong> = Net exports (exports minus imports)</li>
+            <li>Only <strong>final goods</strong> are counted — intermediate goods are excluded to avoid double counting</li>
+            <li>Only <strong>new production</strong> counts — resale of used goods is excluded</li>
+            <li>Only goods produced <strong>within the country</strong> (GNP counts by nationality of producer)</li>
+            <li>Transfer payments (Social Security, welfare) are NOT included — no production occurs</li>
           </ul>
+          <div class="formula-card">
+            <div class="fc-title">GDP Expenditure Approach</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">GDP</span><span class="fc-def">= C + I + G + (X − M)</span></div>
+              <div class="fc-line"><span class="fc-sym">C</span><span class="fc-def">Consumer spending (~70% of US GDP)</span></div>
+              <div class="fc-line"><span class="fc-sym">I</span><span class="fc-def">Gross private investment (equipment, construction, inventory)</span></div>
+              <div class="fc-line"><span class="fc-sym">G</span><span class="fc-def">Government spending on goods/services (NOT transfers)</span></div>
+              <div class="fc-line"><span class="fc-sym">X − M</span><span class="fc-def">Net exports (exports minus imports)</span></div>
+            </div>
+          </div>
         </div>
         <div class="note-block">
           <h3>📈 Real vs. Nominal GDP</h3>
           <ul>
-            <li><span class="key-term">Nominal GDP:</span> Measured in current prices (not adjusted for inflation)</li>
-            <li><span class="key-term">Real GDP:</span> Adjusted for inflation — better measure of actual growth</li>
+            <li><span class="key-term">Nominal GDP:</span> Measured in current year prices — inflated by price increases over time</li>
+            <li><span class="key-term">Real GDP:</span> Adjusted for inflation using a base year — measures actual changes in output</li>
+            <li><span class="key-term">GDP Deflator:</span> Broad price index used to convert nominal → real</li>
           </ul>
-          <div class="formula-box">Real GDP = Nominal GDP ÷ GDP Deflator × 100</div>
+          <div class="formula-card">
+            <div class="fc-title">Real GDP & Growth Rate</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">Real GDP</span><span class="fc-def">= (Nominal GDP ÷ GDP Deflator) × 100</span></div>
+              <div class="fc-line"><span class="fc-sym">Growth %</span><span class="fc-def">= [(Real GDP₂ − Real GDP₁) ÷ Real GDP₁] × 100</span></div>
+            </div>
+          </div>
+          <div class="tip-box">💡 If nominal GDP grows 5% but inflation is 3%, real GDP only grew 2%. Always use real GDP to compare economic performance over time.</div>
         </div>
         <div class="note-block">
           <h3>🔄 Business Cycle</h3>
-          <p>The economy moves through phases: <span class="key-term">Expansion → Peak → Contraction/Recession → Trough → Recovery</span></p>
-          <div class="tip-box">💡 A <strong>recession</strong> is technically two consecutive quarters of negative GDP growth.</div>
+          <p>The economy naturally fluctuates through recurring phases:</p>
+          <ul>
+            <li><span class="key-term">Expansion:</span> Rising real GDP, falling unemployment, rising incomes and consumer confidence</li>
+            <li><span class="key-term">Peak:</span> Maximum output; often accompanied by high inflation pressure</li>
+            <li><span class="key-term">Contraction/Recession:</span> Falling real GDP for 2+ consecutive quarters; rising unemployment, falling spending</li>
+            <li><span class="key-term">Trough:</span> Lowest point of economic output</li>
+            <li><span class="key-term">Recovery/Expansion:</span> GDP begins rising again; unemployment gradually falls</li>
+          </ul>
+          <div class="diagram-wrap">
+            <div class="diag-title">The Business Cycle</div>
+            <svg viewBox="0 0 440 230" xmlns="http://www.w3.org/2000/svg" style="padding:16px;background:#fff;">
+              <line x1="40" y1="200" x2="415" y2="200" stroke="#1a1a1a" stroke-width="2"/>
+              <line x1="40" y1="200" x2="40" y2="20" stroke="#1a1a1a" stroke-width="2"/>
+              <polygon points="415,197 422,200 415,203" fill="#1a1a1a"/>
+              <polygon points="37,20 40,14 43,20" fill="#1a1a1a"/>
+              <text x="418" y="204" font-family="DM Mono,monospace" font-size="10" fill="#555">Time</text>
+              <text x="8" y="115" font-family="DM Mono,monospace" font-size="10" fill="#555" transform="rotate(-90,15,115)">Real GDP</text>
+              <!-- Potential GDP trend line -->
+              <line x1="40" y1="130" x2="415" y2="70" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+              <text x="370" y="64" font-family="DM Mono,monospace" font-size="9" fill="#999">Potential GDP</text>
+              <!-- Business cycle wave -->
+              <path d="M 40 130 C 80 125, 110 90, 140 85 S 180 125, 210 140 S 270 170, 300 160 S 360 100, 390 90 S 415 95, 415 95" stroke="#3882c8" stroke-width="2.5" fill="none"/>
+              <!-- Peak labels -->
+              <circle cx="140" cy="85" r="4" fill="#2d7a4f"/>
+              <text x="130" y="76" font-family="DM Sans,sans-serif" font-size="9" fill="#2d7a4f">Peak</text>
+              <circle cx="390" cy="90" r="4" fill="#2d7a4f"/>
+              <text x="380" y="81" font-family="DM Sans,sans-serif" font-size="9" fill="#2d7a4f">Peak</text>
+              <!-- Trough label -->
+              <circle cx="255" cy="165" r="4" fill="#c0392b"/>
+              <text x="242" y="181" font-family="DM Sans,sans-serif" font-size="9" fill="#c0392b">Trough</text>
+              <!-- Phase labels -->
+              <text x="65" y="108" font-family="DM Sans,sans-serif" font-size="9" fill="#2d7a4f">Expansion</text>
+              <text x="158" y="130" font-family="DM Sans,sans-serif" font-size="9" fill="#c0392b">Recession</text>
+              <text x="295" y="140" font-family="DM Sans,sans-serif" font-size="9" fill="#2d7a4f">Recovery</text>
+            </svg>
+          </div>
+          <div class="tip-box">💡 <strong>Leading indicators</strong> predict future activity (stock prices, building permits, consumer confidence). <strong>Lagging indicators</strong> confirm trends after the fact (unemployment rate, CPI).</div>
+        </div>
+        <div class="note-block">
+          <h3>📐 Aggregate Demand & Aggregate Supply (AD-AS)</h3>
+          <p>The AD-AS model explains the economy's price level and real output simultaneously.</p>
+          <ul>
+            <li><span class="key-term">Aggregate Demand (AD):</span> Total spending in the economy (C+I+G+NX). Slopes downward due to wealth effect, interest rate effect, and net exports effect.</li>
+            <li><span class="key-term">Short-Run Aggregate Supply (SRAS):</span> Slopes upward — higher prices incentivize more production in the short run when input prices are fixed.</li>
+            <li><span class="key-term">Long-Run Aggregate Supply (LRAS):</span> Vertical at the full-employment (potential) output level — in the long run, output depends only on resources and technology, not price level.</li>
+            <li><span class="key-term">Output gap:</span> Difference between actual and potential GDP. Negative gap = recession; Positive gap = inflationary pressure.</li>
+          </ul>
+          <div class="diagram-wrap">
+            <div class="diag-title">AD-AS Model — Short Run & Long Run</div>
+            <svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" style="padding:16px;background:#fff;">
+              <line x1="50" y1="265" x2="410" y2="265" stroke="#1a1a1a" stroke-width="2"/>
+              <line x1="50" y1="265" x2="50" y2="20" stroke="#1a1a1a" stroke-width="2"/>
+              <polygon points="410,262 417,265 410,268" fill="#1a1a1a"/>
+              <polygon points="47,20 50,14 53,20" fill="#1a1a1a"/>
+              <text x="415" y="269" font-family="DM Mono,monospace" font-size="10" fill="#1a1a1a">Real GDP</text>
+              <text x="22" y="17" font-family="DM Mono,monospace" font-size="10" fill="#1a1a1a">Price Level</text>
+              <!-- LRAS vertical line -->
+              <line x1="250" y1="30" x2="250" y2="265" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="7,4"/>
+              <text x="245" y="22" font-family="DM Mono,monospace" font-size="11" fill="#1a1a1a" text-anchor="middle">LRAS</text>
+              <text x="245" y="278" font-family="DM Mono,monospace" font-size="9" fill="#555" text-anchor="middle">Potential GDP</text>
+              <!-- SRAS upward sloping -->
+              <line x1="70" y1="240" x2="380" y2="70" stroke="#e67e22" stroke-width="2"/>
+              <text x="382" y="68" font-family="DM Mono,monospace" font-size="11" fill="#e67e22" font-weight="bold">SRAS</text>
+              <!-- AD downward sloping -->
+              <line x1="80" y1="60" x2="390" y2="245" stroke="#3882c8" stroke-width="2"/>
+              <text x="392" y="247" font-family="DM Mono,monospace" font-size="11" fill="#3882c8" font-weight="bold">AD</text>
+              <!-- Equilibrium at LRAS -->
+              <circle cx="250" cy="155" r="5" fill="#1a1a1a"/>
+              <line x1="50" y1="155" x2="250" y2="155" stroke="#999" stroke-width="1.2" stroke-dasharray="4,3"/>
+              <text x="28" y="159" font-family="DM Mono,monospace" font-size="9" fill="#555">P*</text>
+              <!-- Labels -->
+              <text x="310" y="110" font-family="DM Sans,sans-serif" font-size="9" fill="#2d7a4f">← AD shift right</text>
+              <text x="310" y="122" font-family="DM Sans,sans-serif" font-size="9" fill="#2d7a4f">= inflation pressure</text>
+              <text x="60" y="185" font-family="DM Sans,sans-serif" font-size="9" fill="#c0392b">AD shift left →</text>
+              <text x="60" y="197" font-family="DM Sans,sans-serif" font-size="9" fill="#c0392b">= recession gap</text>
+            </svg>
+          </div>
+          <div class="formula-card">
+            <div class="fc-title">AD-AS Shift Rules</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">AD right</span><span class="fc-def">C↑, I↑, G↑, NX↑ → higher output + higher prices (SR)</span></div>
+              <div class="fc-line"><span class="fc-sym">SRAS left</span><span class="fc-def">Input costs rise (e.g., oil) → stagflation</span></div>
+              <div class="fc-line"><span class="fc-sym">LRAS right</span><span class="fc-def">More resources / better tech → long-run growth</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="note-block">
+          <h3>📉 Recessionary & Inflationary Gaps</h3>
+          <ul>
+            <li><span class="key-term">Recessionary gap:</span> Actual output < potential output. Unemployment above natural rate. AD has shifted left. Fix: expansionary policy (cut rates, increase spending).</li>
+            <li><span class="key-term">Inflationary gap:</span> Actual output > potential output. Unemployment below natural rate. Economy is "overheating." Fix: contractionary policy (raise rates, cut spending).</li>
+            <li>In the long run, wages adjust: in a recession, wages fall → SRAS shifts right → economy self-corrects back to potential output (but this is slow and painful)</li>
+          </ul>
         </div>
       </div>
 
@@ -910,20 +1432,73 @@
         <div class="note-block">
           <h3>📉 Types of Unemployment</h3>
           <ul>
-            <li><span class="key-term">Frictional:</span> Temporarily between jobs (job searching). Normal and healthy.</li>
-            <li><span class="key-term">Structural:</span> Skills mismatch — jobs exist but workers lack required skills</li>
-            <li><span class="key-term">Cyclical:</span> Due to economic downturn/recession. Demand-deficient.</li>
-            <li><span class="key-term">Seasonal:</span> Due to seasonal fluctuations (e.g., ski instructors in summer)</li>
+            <li><span class="key-term">Frictional:</span> Short-term unemployment from transitioning between jobs. Voluntary and normal — reflects healthy job matching. Always exists even at "full employment."</li>
+            <li><span class="key-term">Structural:</span> Long-term mismatch between workers' skills and available jobs. Caused by technological change, industry shifts, globalization. Hardest to fix — requires retraining.</li>
+            <li><span class="key-term">Cyclical:</span> Caused by economic downturns — demand for workers falls during recessions. This is the "bad" type policymakers target with fiscal and monetary policy.</li>
+            <li><span class="key-term">Seasonal:</span> Regular, predictable changes due to time of year (farm workers, ski instructors, retail holiday hiring).</li>
+          </ul>
+          <div class="tip-box">💡 <strong>Full employment</strong> does NOT mean 0% unemployment — it means cyclical unemployment = 0. Frictional and structural unemployment always exist.</div>
+        </div>
+        <div class="note-block">
+          <h3>📐 Measuring Unemployment</h3>
+          <div class="formula-card">
+            <div class="fc-title">Unemployment Formulas</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">U-rate</span><span class="fc-def">= (# Unemployed ÷ Labor Force) × 100</span></div>
+              <div class="fc-line"><span class="fc-sym">Labor Force</span><span class="fc-def">= Employed + Unemployed (actively seeking)</span></div>
+              <div class="fc-line"><span class="fc-sym">LFPR</span><span class="fc-def">= (Labor Force ÷ Working-Age Population) × 100</span></div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>Who is NOT counted as unemployed:</strong> People not actively looking for work, retirees, students, stay-at-home parents</li>
+            <li><span class="key-term">Discouraged workers:</span> People who have given up looking for work — NOT counted in the official unemployment rate, which causes the rate to understate true unemployment</li>
+            <li><span class="key-term">Underemployment:</span> Workers in part-time jobs who want full-time work, or workers in jobs below their skill level — also not captured in the headline rate</li>
+            <li>The BLS publishes multiple measures: U-3 (official rate) through U-6 (broadest, includes discouraged + underemployed)</li>
           </ul>
         </div>
         <div class="note-block">
-          <h3>📐 Unemployment Rate</h3>
-          <div class="formula-box">Unemployment Rate = (Unemployed ÷ Labor Force) × 100</div>
-          <p><strong>Labor force</strong> = employed + unemployed (actively seeking work). Does NOT include discouraged workers.</p>
+          <h3>🎯 Natural Rate of Unemployment (NAIRU)</h3>
+          <p>The <span class="key-term">Non-Accelerating Inflation Rate of Unemployment (NAIRU)</span> = frictional + structural unemployment. Represents "full employment" for an economy.</p>
+          <ul>
+            <li>Typically estimated at <strong>4–5%</strong> for the US economy</li>
+            <li>When actual unemployment < NAIRU: labor market is "tight," wages and inflation tend to rise</li>
+            <li>When actual unemployment > NAIRU: recessionary gap exists, output below potential</li>
+            <li>The NAIRU is not fixed — it can shift with demographics, skills, technology, labor market policies</li>
+          </ul>
         </div>
         <div class="note-block">
-          <h3>🎯 Natural Rate of Unemployment</h3>
-          <p>The <span class="key-term">natural rate</span> (NAIRU) = frictional + structural unemployment. Typically around 4–5%. Cyclical unemployment is zero at full employment.</p>
+          <h3>📊 Unemployment & the Phillips Curve</h3>
+          <p>The <span class="key-term">Phillips Curve</span> shows the short-run trade-off between unemployment and inflation.</p>
+          <ul>
+            <li><strong>Short-run:</strong> Inverse relationship — lower unemployment tends to accompany higher inflation (tight labor markets → wage pressure → higher prices)</li>
+            <li><strong>Long-run:</strong> The Phillips Curve is vertical at the natural rate — there is no long-run trade-off. Expansionary policy that reduces unemployment below NAIRU eventually just causes higher inflation.</li>
+            <li><span class="key-term">Stagflation</span> (1970s) broke the short-run Phillips Curve relationship — both unemployment AND inflation were high simultaneously, caused by supply-side oil shocks.</li>
+          </ul>
+          <div class="diagram-wrap">
+            <div class="diag-title">Short-Run vs. Long-Run Phillips Curve</div>
+            <svg viewBox="0 0 420 270" xmlns="http://www.w3.org/2000/svg" style="padding:16px;background:#fff;">
+              <line x1="50" y1="240" x2="390" y2="240" stroke="#1a1a1a" stroke-width="2"/>
+              <line x1="50" y1="240" x2="50" y2="20" stroke="#1a1a1a" stroke-width="2"/>
+              <polygon points="390,237 397,240 390,243" fill="#1a1a1a"/>
+              <polygon points="47,20 50,14 53,20" fill="#1a1a1a"/>
+              <text x="395" y="244" font-family="DM Mono,monospace" font-size="10" fill="#1a1a1a">Unemployment</text>
+              <text x="10" y="140" font-family="DM Mono,monospace" font-size="10" fill="#1a1a1a" transform="rotate(-90,20,140)">Inflation</text>
+              <!-- Short-run Phillips Curve (downward arc) -->
+              <path d="M 90 55 Q 180 130 340 210" stroke="#3882c8" stroke-width="2.5" fill="none"/>
+              <text x="342" y="213" font-family="DM Mono,monospace" font-size="11" fill="#3882c8" font-weight="bold">SRPC</text>
+              <!-- Long-run Phillips Curve (vertical at NAIRU) -->
+              <line x1="220" y1="30" x2="220" y2="240" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="7,4"/>
+              <text x="215" y="22" font-family="DM Mono,monospace" font-size="9" fill="#1a1a1a" text-anchor="middle">LRPC</text>
+              <text x="215" y="252" font-family="DM Mono,monospace" font-size="9" fill="#555" text-anchor="middle">NAIRU</text>
+              <!-- Labels -->
+              <text x="100" y="100" font-family="DM Sans,sans-serif" font-size="10" fill="#3882c8">Low U, High π</text>
+              <text x="255" y="200" font-family="DM Sans,sans-serif" font-size="10" fill="#3882c8">High U, Low π</text>
+              <!-- Stagflation arrow -->
+              <text x="290" y="100" font-family="DM Sans,sans-serif" font-size="9" fill="#c0392b">Stagflation</text>
+              <text x="290" y="112" font-family="DM Sans,sans-serif" font-size="9" fill="#c0392b">(off the curve)</text>
+              <circle cx="310" cy="120" r="4" fill="#c0392b"/>
+            </svg>
+          </div>
         </div>
       </div>
 
@@ -935,24 +1510,53 @@
         </div>
         <div class="note-block">
           <h3>💵 What is Inflation?</h3>
-          <p><span class="key-term">Inflation</span> is a sustained increase in the general price level. Measured by the <span class="key-term">Consumer Price Index (CPI)</span>.</p>
-          <div class="formula-box">Inflation Rate = [(CPI₂ − CPI₁) ÷ CPI₁] × 100</div>
-        </div>
-        <div class="note-block">
-          <h3>🔥 Types of Inflation</h3>
+          <p><span class="key-term">Inflation</span> is a sustained increase in the general price level of goods and services, which erodes the purchasing power of money.</p>
+          <div class="formula-card">
+            <div class="fc-title">Inflation Formulas</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">Inflation</span><span class="fc-def">= [(CPI₂ − CPI₁) ÷ CPI₁] × 100</span></div>
+              <div class="fc-line"><span class="fc-sym">CPI</span><span class="fc-def">= (Cost of basket current year ÷ Cost in base year) × 100</span></div>
+            </div>
+          </div>
           <ul>
-            <li><span class="key-term">Demand-pull:</span> "Too much money chasing too few goods" — driven by increased aggregate demand</li>
-            <li><span class="key-term">Cost-push:</span> Rising input/production costs push prices up (e.g., oil price shock)</li>
-            <li><span class="key-term">Built-in:</span> Wage-price spiral — workers demand higher wages → firms raise prices</li>
+            <li><span class="key-term">CPI (Consumer Price Index):</span> Tracks price changes of a fixed "basket" of consumer goods — the most common inflation measure</li>
+            <li><span class="key-term">PCE (Personal Consumption Expenditures):</span> The Fed's preferred measure — broader and adjusts for substitution between goods</li>
+            <li><span class="key-term">Core inflation:</span> CPI or PCE excluding food and energy prices (more volatile) — gives a cleaner signal of underlying inflation trends</li>
+            <li><span class="key-term">PPI (Producer Price Index):</span> Measures inflation from the seller's perspective — often a leading indicator of future CPI</li>
           </ul>
         </div>
         <div class="note-block">
-          <h3>⚖️ Inflation Effects</h3>
+          <h3>🔥 Causes of Inflation</h3>
           <ul>
-            <li>Hurts creditors (lenders) and helps debtors (borrowers)</li>
-            <li>Erodes purchasing power of fixed incomes</li>
-            <li><span class="key-term">Deflation</span> (falling prices) can be dangerous — delays spending</li>
-            <li>The Fed targets ~2% inflation</li>
+            <li><span class="key-term">Demand-pull inflation:</span> Aggregate demand rises faster than productive capacity — "too much money chasing too few goods." Occurs during booms, high government spending, or rapid money supply growth. AD shifts right → price level rises.</li>
+            <li><span class="key-term">Cost-push inflation:</span> A negative supply shock raises production costs, pushing SRAS left — output falls AND prices rise simultaneously (stagflation). Examples: 1970s oil embargos, pandemic supply chain disruptions.</li>
+            <li><span class="key-term">Built-in / Wage-price spiral:</span> Workers expect inflation → demand higher wages → firms raise prices → inflation continues. Becomes self-fulfilling if expectations are not anchored.</li>
+            <li><span class="key-term">Quantity theory of money:</span> MV = PQ. If money supply (M) grows faster than real output (Q), prices (P) must rise.</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>⚖️ Effects of Inflation</h3>
+          <ul>
+            <li><strong>Redistribution:</strong> Hurts <span class="key-term">creditors</span> (lenders) — they get repaid in dollars worth less. Helps <span class="key-term">debtors</span> (borrowers) — they repay with cheaper dollars.</li>
+            <li><strong>Fixed-income earners:</strong> Harmed — their nominal income stays constant while prices rise, so real purchasing power falls</li>
+            <li><strong>Real vs. nominal interest rates:</strong> Real rate = Nominal rate − Inflation rate (Fisher equation). High inflation erodes the real return on savings.</li>
+            <li><strong>Menu costs:</strong> Resources wasted on constantly updating prices</li>
+            <li><strong>Shoe-leather costs:</strong> People make more trips to the bank to hold less cash during high inflation</li>
+          </ul>
+          <div class="formula-card">
+            <div class="fc-title">Fisher Equation</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">Real Rate</span><span class="fc-def">= Nominal Interest Rate − Inflation Rate</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="note-block">
+          <h3>📉 Deflation & Hyperinflation</h3>
+          <ul>
+            <li><span class="key-term">Deflation:</span> Falling price level — sounds good but is dangerous. Consumers delay purchases expecting lower future prices → spending collapses → recession deepens. Example: Japan's "Lost Decade."</li>
+            <li><span class="key-term">Disinflation:</span> Inflation is still positive but slowing (not the same as deflation)</li>
+            <li><span class="key-term">Hyperinflation:</span> Extremely rapid inflation (>50%/month) — destroys the value of currency, economic chaos. Examples: Zimbabwe 2008, Germany 1923.</li>
+            <li>The Fed targets <strong>2% inflation</strong> — low and stable enough to avoid deflation risk while not distorting economic decisions</li>
           </ul>
         </div>
       </div>
@@ -964,25 +1568,68 @@
           <h2>Monetary Policy</h2>
         </div>
         <div class="note-block">
-          <h3>🏦 The Federal Reserve</h3>
-          <p>The <span class="key-term">Federal Reserve (Fed)</span> is the central bank of the United States. It controls monetary policy to promote maximum employment and stable prices (dual mandate).</p>
-        </div>
-        <div class="note-block">
-          <h3>🔧 Tools of the Fed</h3>
+          <h3>🏦 The Federal Reserve System</h3>
+          <p>The <span class="key-term">Federal Reserve (Fed)</span> is the central bank of the United States, established in 1913. It is independent of the government to avoid political pressure.</p>
           <ul>
-            <li><span class="key-term">Federal funds rate:</span> Interest rate banks charge each other overnight — the Fed's main tool</li>
-            <li><span class="key-term">Open market operations:</span> Buying/selling government securities to adjust money supply</li>
-            <li><span class="key-term">Reserve requirement:</span> Minimum reserves banks must hold</li>
-            <li><span class="key-term">Discount rate:</span> Rate Fed charges banks for direct loans</li>
+            <li><strong>Structure:</strong> Board of Governors (7 members) + 12 regional Federal Reserve Banks. The <span class="key-term">FOMC (Federal Open Market Committee)</span> sets monetary policy — meets 8 times per year.</li>
+            <li><strong>Dual mandate:</strong> Maximum employment AND stable prices (2% inflation target)</li>
+            <li><strong>Chair:</strong> Jerome Powell (term expires May 2026)</li>
+            <li>The Fed acts as "lender of last resort" — provides emergency liquidity to banks during crises</li>
           </ul>
         </div>
         <div class="note-block">
-          <h3>➡️ Expansionary vs. Contractionary</h3>
+          <h3>🔧 Tools of Monetary Policy</h3>
           <ul>
-            <li><strong>Expansionary:</strong> Lower rates → increase money supply → stimulate economy (fight recession)</li>
-            <li><strong>Contractionary:</strong> Raise rates → decrease money supply → slow economy (fight inflation)</li>
+            <li><span class="key-term">Federal funds rate:</span> The interest rate at which banks lend reserves to each other overnight. The Fed's primary tool — targets a range (e.g., 3.50–3.75% as of early 2026). Changes ripple through all other interest rates in the economy.</li>
+            <li><span class="key-term">Open Market Operations (OMO):</span> The Fed buys or sells Treasury securities on the open market.
+              <ul>
+                <li>Buy bonds → inject money into banking system → money supply ↑ → rates ↓ (expansionary)</li>
+                <li>Sell bonds → drain money from banking system → money supply ↓ → rates ↑ (contractionary)</li>
+              </ul>
+            </li>
+            <li><span class="key-term">Discount rate:</span> Interest rate the Fed charges banks for direct borrowing at the "discount window." Higher than the fed funds rate — signal of last resort lending.</li>
+            <li><span class="key-term">Reserve requirement:</span> Minimum fraction of deposits banks must hold as reserves. Rarely used in modern policy — set to 0% since 2020.</li>
+            <li><span class="key-term">Interest on Reserves (IOER/IOR):</span> Fed pays interest on bank reserves — an important modern tool for controlling the floor of the fed funds rate.</li>
           </ul>
-          <div class="tip-box">💡 <strong>Quantitative easing (QE):</strong> Fed buys long-term bonds to inject money — used when rates near zero.</div>
+        </div>
+        <div class="note-block">
+          <h3>➡️ Expansionary vs. Contractionary Monetary Policy</h3>
+          <ul>
+            <li><strong>Expansionary ("easy money"):</strong> Fed lowers fed funds rate → borrowing becomes cheaper → investment and consumption rise → AD shifts right → output and employment increase. Used to fight recessions.</li>
+            <li><strong>Contractionary ("tight money"):</strong> Fed raises fed funds rate → borrowing more expensive → investment and consumption fall → AD shifts left → inflation cools. Used to fight inflation.</li>
+          </ul>
+          <div class="formula-card">
+            <div class="fc-title">Monetary Policy Transmission</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">Expansionary</span><span class="fc-def">↓ Fed rate → ↓ interest rates → ↑ I & C → ↑ AD → ↑ GDP, ↓ unemployment</span></div>
+              <div class="fc-line"><span class="fc-sym">Contractionary</span><span class="fc-def">↑ Fed rate → ↑ interest rates → ↓ I & C → ↓ AD → ↓ inflation</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="note-block">
+          <h3>💡 Money Supply & the Money Multiplier</h3>
+          <ul>
+            <li><span class="key-term">Money supply (M1):</span> Currency in circulation + demand deposits (checking accounts)</li>
+            <li><span class="key-term">Money supply (M2):</span> M1 + savings accounts + small time deposits + money market funds</li>
+            <li><span class="key-term">Money multiplier:</span> An initial deposit gets re-lent through the banking system, multiplying the money supply</li>
+          </ul>
+          <div class="formula-card">
+            <div class="fc-title">Money Multiplier</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">Multiplier</span><span class="fc-def">= 1 ÷ Reserve Requirement</span></div>
+              <div class="fc-line"><span class="fc-sym">ΔMoney Supply</span><span class="fc-def">= Initial Deposit × Money Multiplier</span></div>
+              <div class="fc-line"><span class="fc-sym">Example</span><span class="fc-def">10% reserve req. → multiplier = 10 → $1,000 deposit = $10,000 created</span></div>
+            </div>
+          </div>
+          <div class="tip-box">💡 <strong>Quantitative Easing (QE):</strong> When rates hit near-zero and conventional policy is exhausted, the Fed buys longer-term assets (mortgage-backed securities, long-term Treasuries) to push down long-term rates. Used aggressively in 2008–2009 and 2020.</div>
+        </div>
+        <div class="note-block">
+          <h3>⏱️ Lags in Monetary Policy</h3>
+          <ul>
+            <li><span class="key-term">Recognition lag:</span> Time to identify that a problem exists</li>
+            <li><span class="key-term">Implementation lag:</span> Monetary policy is relatively fast — the FOMC can act at any of its 8 annual meetings (or emergency meetings)</li>
+            <li><span class="key-term">Impact lag:</span> 6–18 months for rate changes to fully work through the economy — the Fed must act on forecasts, not current data</li>
+          </ul>
         </div>
       </div>
 
@@ -994,22 +1641,67 @@
         </div>
         <div class="note-block">
           <h3>🏛️ What is Fiscal Policy?</h3>
-          <p>Government use of <span class="key-term">taxation</span> and <span class="key-term">spending</span> to influence the economy. Set by Congress and the President.</p>
+          <p>Fiscal policy is the government's use of <span class="key-term">taxation</span> and <span class="key-term">spending</span> to influence macroeconomic conditions. Unlike monetary policy (controlled by the Fed), fiscal policy is set by <strong>Congress and the President</strong>.</p>
+          <ul>
+            <li><span class="key-term">Expansionary fiscal policy:</span> Increase government spending (G↑) or cut taxes (T↓) → boosts aggregate demand → used during recessions</li>
+            <li><span class="key-term">Contractionary fiscal policy:</span> Decrease spending (G↓) or raise taxes (T↑) → reduces aggregate demand → used to fight inflation</li>
+          </ul>
+          <div class="formula-card">
+            <div class="fc-title">Fiscal Policy Effects on AD</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">Expansionary</span><span class="fc-def">G↑ or T↓ → C↑ or G↑ → AD shifts right → GDP↑, unemployment↓</span></div>
+              <div class="fc-line"><span class="fc-sym">Contractionary</span><span class="fc-def">G↓ or T↑ → C↓ or G↓ → AD shifts left → inflation↓</span></div>
+            </div>
+          </div>
         </div>
         <div class="note-block">
-          <h3>📈 Expansionary vs. Contractionary</h3>
+          <h3>⚡ The Spending Multiplier</h3>
+          <p>An initial change in government spending creates a chain reaction of spending throughout the economy — the total impact on GDP is larger than the initial injection.</p>
+          <div class="formula-card">
+            <div class="fc-title">Spending Multiplier</div>
+            <div class="fc-body">
+              <div class="fc-line"><span class="fc-sym">Multiplier</span><span class="fc-def">= 1 ÷ (1 − MPC)  =  1 ÷ MPS</span></div>
+              <div class="fc-line"><span class="fc-sym">MPC</span><span class="fc-def">Marginal Propensity to Consume — fraction of extra income spent</span></div>
+              <div class="fc-line"><span class="fc-sym">MPS</span><span class="fc-def">Marginal Propensity to Save — fraction of extra income saved</span></div>
+              <div class="fc-line"><span class="fc-sym">Identity</span><span class="fc-def">MPC + MPS = 1</span></div>
+              <div class="fc-line"><span class="fc-sym">Example</span><span class="fc-def">MPC = 0.8 → Multiplier = 5 → $100B spending = $500B GDP impact</span></div>
+              <div class="fc-line"><span class="fc-sym">Tax mult.</span><span class="fc-def">= −MPC ÷ MPS  (smaller than spending multiplier)</span></div>
+            </div>
+          </div>
           <ul>
-            <li><strong>Expansionary:</strong> Increase spending or cut taxes → boost aggregate demand (used in recessions)</li>
-            <li><strong>Contractionary:</strong> Decrease spending or raise taxes → reduce aggregate demand (used against inflation)</li>
+            <li>Tax multiplier is smaller than spending multiplier because some of a tax cut is saved, not spent</li>
+            <li>Tax multiplier = −MPC ÷ MPS (negative because tax cuts increase income)</li>
+          </ul>
+          <div class="tip-box">💡 The higher the MPC, the larger the multiplier. Economies where people spend more of each dollar have stronger multiplier effects.</div>
+        </div>
+        <div class="note-block">
+          <h3>🔄 Automatic Stabilizers</h3>
+          <p>Automatic stabilizers are built-in fiscal mechanisms that cushion economic fluctuations <em>without</em> requiring new legislation — they respond automatically to economic conditions.</p>
+          <ul>
+            <li><span class="key-term">Unemployment insurance:</span> Payments automatically increase during recessions (when unemployment rises), sustaining consumer spending</li>
+            <li><span class="key-term">Progressive income taxes:</span> During booms, higher incomes are taxed at higher rates → government collects more → automatically cools demand. During recessions, incomes fall → tax burden automatically decreases.</li>
+            <li><span class="key-term">Welfare/SNAP/Medicaid:</span> Enrollment automatically rises during downturns, injecting spending into the economy</li>
           </ul>
         </div>
         <div class="note-block">
-          <h3>⚡ Multiplier Effect & Automatic Stabilizers</h3>
+          <h3>💰 Budget Deficits, Surpluses & National Debt</h3>
           <ul>
-            <li><span class="key-term">Multiplier:</span> $1 of government spending generates more than $1 in GDP (ripple effect)</li>
-            <li><span class="key-term">Automatic stabilizers:</span> Built-in policies that respond automatically — unemployment insurance, progressive taxes</li>
+            <li><span class="key-term">Budget deficit:</span> Government spending > tax revenue in a given year. Financed by issuing Treasury bonds.</li>
+            <li><span class="key-term">Budget surplus:</span> Tax revenue > government spending</li>
+            <li><span class="key-term">National debt:</span> The accumulation of all past budget deficits (minus surpluses). The US national debt exceeds $36 trillion.</li>
+            <li><span class="key-term">Crowding out:</span> When government borrows heavily, it competes with private borrowers → drives up interest rates → private investment falls. This partially offsets the stimulus effect of expansionary fiscal policy.</li>
+            <li><span class="key-term">Debt-to-GDP ratio:</span> A key indicator of fiscal sustainability. US ratio has risen significantly since 2008.</li>
           </ul>
-          <div class="tip-box">💡 Fiscal policy has <strong>recognition, decision, and implementation lags</strong>, making it slower than monetary policy.</div>
+        </div>
+        <div class="note-block">
+          <h3>⏱️ Lags in Fiscal Policy</h3>
+          <ul>
+            <li><span class="key-term">Recognition lag:</span> Time to identify the economic problem</li>
+            <li><span class="key-term">Decision/Legislative lag:</span> Congress must debate and pass legislation — can take months or years. This is fiscal policy's biggest weakness vs. monetary policy.</li>
+            <li><span class="key-term">Implementation lag:</span> Government must actually spend the money — infrastructure projects take years</li>
+            <li><span class="key-term">Impact lag:</span> Effects ripple through the economy slowly</li>
+          </ul>
+          <div class="tip-box">💡 Fiscal policy is more powerful but slower than monetary policy. Monetary policy is faster but less direct. In a severe recession, both are often used together.</div>
         </div>
       </div>
 
@@ -1077,46 +1769,64 @@
       <div class="note-section" id="note-current1">
         <div class="note-header">
           <span class="note-tag">Current Events</span>
-          <h2>Key Topics 2024–25</h2>
+          <h2>Key Topics 2025–26</h2>
         </div>
         <div class="note-block">
           <h3>📰 Federal Reserve & Inflation</h3>
           <ul>
-            <li>The Fed raised rates aggressively in 2022–23 to combat post-pandemic inflation (reached ~9% CPI in 2022)</li>
-            <li>2024: Fed began cutting rates as inflation cooled toward the 2% target</li>
-            <li>Key metric to know: <span class="key-term">PCE (Personal Consumption Expenditures)</span> — the Fed's preferred inflation measure</li>
+            <li>After raising rates to a peak of ~5.25–5.5% in 2023, the Fed began cutting in late 2024 — by December 2025 the federal funds rate was cut to <span class="key-term">3.50–3.75%</span> (a total of 175 basis points in cuts since Sept 2024)</li>
+            <li>Inflation (CPI) came in at ~<span class="key-term">2.8% in 2025</span> — still above the Fed's 2% target, largely driven by tariff-related price pressures</li>
+            <li>The Fed's preferred measure is <span class="key-term">PCE (Personal Consumption Expenditures)</span> — running ~2.8% heading into 2026</li>
+            <li>The Fed paused rate cuts in early 2026 due to uncertainty from tariffs, immigration policy, and a government shutdown that disrupted economic data</li>
+            <li>Jerome Powell's term as Fed Chair expires <strong>May 2026</strong> — a new chair appointment could shift Fed messaging</li>
           </ul>
         </div>
         <div class="note-block">
           <h3>💼 Labor Market</h3>
           <ul>
-            <li>US unemployment rate stayed relatively low (~3.5–4%) through 2024</li>
-            <li><span class="key-term">Labor force participation rate:</span> % of working-age population working or looking for work</li>
-            <li>Wage growth and "tight" labor markets were major economic topics</li>
+            <li>Unemployment rose from ~4.1% in early 2025 to <span class="key-term">~4.4–4.6%</span> by end of 2025 — a softening labor market</li>
+            <li>Job growth slowed significantly in 2025 — one of the weakest years for payroll gains since the 2009 financial crisis</li>
+            <li>A sharp decline in immigration reduced labor supply, contributing to slower workforce growth</li>
+            <li><span class="key-term">Labor force participation rate:</span> % of working-age population working or actively seeking work</li>
+            <li>Wage growth softened but still outpaced inflation by ~1%, keeping real wages positive</li>
+            <li>The labor market entered a "low-hire, low-fire" equilibrium — few layoffs but also fewer new jobs</li>
           </ul>
         </div>
         <div class="note-block">
-          <h3>🌐 Trade & Geopolitics</h3>
+          <h3>🌐 Trade, Tariffs & Geopolitics</h3>
           <ul>
-            <li>US-China trade tensions; tariffs and supply chain reshoring</li>
-            <li><span class="key-term">Nearshoring/Friendshoring:</span> Moving supply chains to nearby or allied countries</li>
-            <li>National debt levels and deficit spending debates</li>
+            <li><span class="key-term">Tariffs</span> were a dominant economic story in 2025 — sweeping new tariffs raised costs for importers and consumers</li>
+            <li>"Liberation Day" tariff announcements caused major business and market uncertainty in 2025</li>
+            <li>Tariff pass-through to consumers exceeded 50% — meaning households are paying meaningfully higher prices</li>
+            <li><span class="key-term">USMCA</span> (US-Mexico-Canada Agreement) is under renegotiation pressure; trade relations with Canada and Mexico complicated by tariffs</li>
+            <li>US-China tensions continued — tech export restrictions, AI competition, and an "arms race" in quantum computing</li>
+            <li><span class="key-term">Nearshoring:</span> Companies moving supply chains closer to home to reduce tariff exposure</li>
           </ul>
         </div>
         <div class="note-block">
-          <h3>💻 Technology & Economy</h3>
+          <h3>📊 GDP & Economic Growth</h3>
           <ul>
-            <li>AI and automation impact on labor markets (productivity vs. displacement debate)</li>
-            <li>Semiconductor industry investment (CHIPS Act)</li>
-            <li>Green energy transition economics</li>
+            <li>US real GDP grew approximately <span class="key-term">1.8–2%</span> in 2025 — solid but slower than prior years</li>
+            <li>A 43-day government shutdown in late 2025 disrupted economic activity and data collection</li>
+            <li>Growth in 2026 is projected around <span class="key-term">1.9–2.2%</span> — supported by fiscal stimulus but held back by tariffs and weaker consumer spending</li>
+            <li><span class="key-term">Stagflation risk</span> is a key concern for 2026: inflation remains above target while unemployment is rising — historically hard for the Fed to address simultaneously</li>
           </ul>
-          <div class="tip-box">💡 For NEC, follow The Wall Street Journal, The Economist, and the Federal Reserve's website for current events prep.</div>
+        </div>
+        <div class="note-block">
+          <h3>💻 AI, Technology & the Economy</h3>
+          <ul>
+            <li>AI investment surged — hyperscaler (big tech) capital spending on data centers rose ~69% in 2025 and is projected up another ~33% in 2026</li>
+            <li>AI's impact on jobs is debated: productivity gains vs. potential hiring slowdowns as CEOs gain confidence to reduce headcount</li>
+            <li>AI and quantum computing are a central front in US-China economic and tech competition</li>
+            <li>The <span class="key-term">CHIPS Act</span> continues to drive domestic semiconductor manufacturing investment</li>
+          </ul>
+          <div class="tip-box">💡 For NEC prep, follow <strong>The Wall Street Journal</strong>, the <strong>Federal Reserve website (federalreserve.gov)</strong>, and the <strong>Bureau of Labor Statistics (bls.gov)</strong> for the latest data.</div>
         </div>
       </div>
 
     </div><!-- end study-content -->
   </div><!-- end study-layout -->
-</div>
+</div><!-- end page-notes -->
 
 <!-- ===== FLASHCARDS ===== -->
 <div class="page" id="page-flashcards">
