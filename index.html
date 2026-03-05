@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ricardo Division — NEC Study Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f9f9f8;
+    --surface: #ffffff;
+    --surface2: #f3f3f1;
+    --accent: #1a1a1a;
+    --accent2: #555;
+    --accent3: #2d7a4f;
+    --accent4: #c0392b;
+    --text: #1a1a1a;
+    --muted: #999;
+    --border: rgba(0,0,0,0.09);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before { display: none; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(249,249,248,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-brand span { color: var(--muted); font-weight: 400; }
+
+  .nav-tabs {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+  .nav-tabs button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .nav-tabs button:hover { color: var(--text); background: var(--surface2); }
+  .nav-tabs button.active { color: var(--text); background: var(--surface2); border: 1px solid var(--border); }
+
+  /* MAIN */
+  main { position: relative; z-index: 1; }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ===== HOME ===== */
+  .hero {
+    padding: 5rem 2rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.3rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.2rem;
+    color: var(--text);
+  }
+
+  .hero h1 em { font-style: normal; color: var(--muted); }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+  }
+
+  .hero-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.25s;
+    border-radius: 10px;
+  }
+
+  .hero-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.07); border-color: #ccc; }
+  .hero-card:hover::after { opacity: 1; }
+
+  .hero-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .hero-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text);
+    display: block;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+
+  /* ===== STUDY NOTES ===== */
+  .study-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: calc(100vh - 60px);
+  }
+
+  .study-sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 56px;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+  }
+
+  .sidebar-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 1.2rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.88rem;
+    border-left: 2px solid transparent;
+  }
+
+  .sidebar-item:hover { background: var(--surface2); color: var(--text); }
+  .sidebar-item.active { background: var(--surface2); border-left-color: var(--text); color: var(--text); }
+
+  .study-content {
+    padding: 2.5rem 3rem;
+    max-width: 800px;
+  }
+
+  .note-section { display: none; }
+  .note-section.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .note-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .note-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
+  .note-header h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .note-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .note-block h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .note-block p, .note-block li {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: #444;
+  }
+
+  .note-block ul { padding-left: 1.2rem; }
+  .note-block li { margin-bottom: 0.3rem; }
+
+  .formula-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.9rem 1.2rem;
+    margin: 1rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: #333;
+  }
+
+  .key-term {
+    display: inline-block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .tip-box {
+    background: #f0faf4;
+    border-left: 3px solid #2d7a4f;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0 6px 6px 0;
+    margin: 1rem 0;
+    font-size: 0.87rem;
+    color: #2d5a3d;
+  }
+
+  /* ===== FLASHCARDS ===== */
+  .flashcard-area {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .fc-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .fc-controls h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .fc-category-select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .fc-progress {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .fc-progress-bar {
+    height: 2px;
+    background: var(--surface2);
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .fc-progress-fill {
+    height: 100%;
+    background: var(--text);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+
+  .flashcard {
+    perspective: 1200px;
+    height: 300px;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+  }
+
+  .flashcard-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+
+  .flashcard-front, .flashcard-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+    text-align: center;
+  }
+
+  .flashcard-front {
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .flashcard-back {
+    background: var(--surface2);
+    border: 1px solid #ddd;
+    transform: rotateY(180deg);
+  }
+
+  .fc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .fc-question {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .fc-answer {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #333;
+  }
+
+  .fc-answer strong { color: var(--text); }
+
+  .fc-hint {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 1.2rem;
+  }
+
+  .fc-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .btn {
+    padding: 0.7rem 1.6rem;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary { background: var(--text); color: #fff; }
+  .btn-primary:hover { background: #333; transform: translateY(-1px); }
+  .btn-ghost { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+  .btn-ghost:hover { background: var(--surface2); }
+  .btn-success { background: #f0faf4; color: #2d7a4f; border: 1px solid #c6e8d4; }
+  .btn-danger { background: #fdf2f2; color: #c0392b; border: 1px solid #f5c6cb; }
+
+  /* ===== PRACTICE ===== */
+  .quiz-area {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .quiz-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .quiz-header h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .quiz-score-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    color: var(--text);
+  }
+
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.2rem;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .q-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .q-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .q-cat {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--surface2);
+    color: var(--muted);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  .q-text {
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .q-options { display: flex; flex-direction: column; gap: 0.7rem; }
+
+  .q-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.9rem 1.1rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .q-option:hover:not(.disabled) { border-color: #bbb; background: #f5f5f4; }
+  .q-option.correct { background: #f0faf4; border-color: #2d7a4f; color: #1a4a2e; }
+  .q-option.wrong { background: #fdf2f2; border-color: #c0392b; color: #7b1a1a; }
+  .q-option.disabled { cursor: default; }
+
+  .q-letter {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .q-explanation {
+    margin-top: 1rem;
+    padding: 0.9rem 1.1rem;
+    background: var(--surface2);
+    border-left: 3px solid #aaa;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.87rem;
+    color: #444;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .q-explanation.show { display: block; animation: fadeIn 0.25s ease; }
+
+  .quiz-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+
+  .results-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .results-panel.show { display: block; }
+  .results-panel h3 { font-family: 'DM Sans', sans-serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .results-score { font-size: 3.2rem; font-weight: 700; color: var(--text); font-family: 'DM Sans', sans-serif; }
+
+  /* Credit badge */
+  .credit-badge {
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    z-index: 200;
+  }
+
+  /* Practice test button on home */
+  .practice-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 0.65rem 1.4rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+  }
+  .practice-link-btn:hover { background: var(--surface2); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  .practice-link-btn .ext-icon { font-size: 0.9rem; }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Ricardo <span>Study Hub</span></div>
+  <ul class="nav-tabs">
+    <li><button class="active" onclick="showPage('home', this)">Home</button></li>
+    <li><button onclick="showPage('notes', this)">Study Notes</button></li>
+    <li><button onclick="showPage('flashcards', this)">Flashcards</button></li>
+    <li><button onclick="showPage('quiz', this)">Practice Quiz</button></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ===== HOME ===== -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-badge">NEC · David Ricardo Division</div>
+    <h1>NEC<br><em>Study Guide</em></h1>
+    <p>Everything you need to dominate the National Economics Challenge — study notes, flashcards, and timed practice questions.</p>
+    <div class="hero-cards">
+      <div class="hero-card" onclick="showPage('notes', document.querySelectorAll('.nav-tabs button')[1])">
+        <span class="icon">📚</span>
+        <h3>Study Notes</h3>
+        <p>Core concepts across micro, macro, international economics & current events.</p>
+      </div>
+      <div class="hero-card" onclick="showPage('flashcards', document.querySelectorAll('.nav-tabs button')[2])">
+        <span class="icon">🃏</span>
+        <h3>Flashcards</h3>
+        <p>60+ cards covering key terms, formulas, and definitions. Flip to reveal.</p>
+      </div>
+      <div class="hero-card" onclick="showPage('quiz', document.querySelectorAll('.nav-tabs button')[3])">
+        <span class="icon">✏️</span>
+        <h3>Practice Quiz</h3>
+        <p>NEC-style multiple choice questions with instant explanations.</p>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-num">4</span><span class="stat-label">Topic Areas</span></div>
+      <div class="stat"><span class="stat-num">60+</span><span class="stat-label">Flashcards</span></div>
+      <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Practice Qs</span></div>
+    </div>
+    <div style="text-align:center;padding-bottom:3rem;">
+      <a href="https://econchallenge.unl.edu/Nebraska/Practice" target="_blank" class="practice-link-btn">
+        <span class="ext-icon">🔗</span> Official NEC Practice Test ↗
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STUDY NOTES ===== -->
+<div class="page" id="page-notes">
+  <div class="study-layout">
+    <aside class="study-sidebar">
+      <div class="sidebar-label">Microeconomics</div>
+      <div class="sidebar-item active" onclick="showNote('micro1', this)">📈 Supply & Demand</div>
+      <div class="sidebar-item" onclick="showNote('micro2', this)">💰 Elasticity</div>
+      <div class="sidebar-item" onclick="showNote('micro3', this)">🏭 Market Structures</div>
+      <div class="sidebar-item" onclick="showNote('micro4', this)">🛒 Consumer Theory</div>
+
+      <div class="sidebar-label">Macroeconomics</div>
+      <div class="sidebar-item" onclick="showNote('macro1', this)">📊 GDP & Growth</div>
+      <div class="sidebar-item" onclick="showNote('macro2', this)">📉 Unemployment</div>
+      <div class="sidebar-item" onclick="showNote('macro3', this)">💵 Inflation</div>
+      <div class="sidebar-item" onclick="showNote('macro4', this)">🏦 Monetary Policy</div>
+      <div class="sidebar-item" onclick="showNote('macro5', this)">🏛️ Fiscal Policy</div>
+
+      <div class="sidebar-label">International</div>
+      <div class="sidebar-item" onclick="showNote('intl1', this)">🌐 Trade & Comparative Advantage</div>
+      <div class="sidebar-item" onclick="showNote('intl2', this)">💱 Exchange Rates</div>
+
+      <div class="sidebar-label">Current Events</div>
+      <div class="sidebar-item" onclick="showNote('current1', this)">📰 Key Topics 2024–25</div>
+    </aside>
+
+    <div class="study-content">
+
+      <!-- SUPPLY & DEMAND -->
+      <div class="note-section active" id="note-micro1">
+        <div class="note-header">
+          <span class="note-tag">Microeconomics</span>
+          <h2>Supply & Demand</h2>
+        </div>
+        <div class="note-block">
+          <h3>⬆️ The Law of Demand</h3>
+          <p>As price increases, quantity demanded decreases (inverse relationship), ceteris paribus. The demand curve slopes downward.</p>
+          <p style="margin-top:.6rem"><strong>Demand Shifters (TRIBE):</strong></p>
+          <ul>
+            <li><span class="key-term">T</span>astes & preferences</li>
+            <li><span class="key-term">R</span>elated goods prices (substitutes & complements)</li>
+            <li><span class="key-term">I</span>ncome of buyers</li>
+            <li><span class="key-term">B</span>uyers (number of buyers in market)</li>
+            <li><span class="key-term">E</span>xpectations of future prices</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>⬇️ The Law of Supply</h3>
+          <p>As price increases, quantity supplied increases (positive relationship). The supply curve slopes upward.</p>
+          <p style="margin-top:.6rem"><strong>Supply Shifters (ROTTEN):</strong></p>
+          <ul>
+            <li><span class="key-term">R</span>esource costs (input prices)</li>
+            <li><span class="key-term">O</span>ther goods' prices (opportunity cost)</li>
+            <li><span class="key-term">T</span>echnology improvements</li>
+            <li><span class="key-term">T</span>axes & subsidies</li>
+            <li><span class="key-term">E</span>xpectations of sellers</li>
+            <li><span class="key-term">N</span>umber of sellers</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>⚖️ Market Equilibrium</h3>
+          <p>Equilibrium is where quantity demanded = quantity supplied. The price at this intersection is the <span class="key-term">equilibrium price</span> (market-clearing price).</p>
+          <div class="tip-box">💡 <strong>Surplus:</strong> Price too high → Qs > Qd. Price falls back to equilibrium.<br><strong>Shortage:</strong> Price too low → Qd > Qs. Price rises back to equilibrium.</div>
+        </div>
+      </div>
+
+      <!-- ELASTICITY -->
+      <div class="note-section" id="note-micro2">
+        <div class="note-header">
+          <span class="note-tag">Microeconomics</span>
+          <h2>Elasticity</h2>
+        </div>
+        <div class="note-block">
+          <h3>📐 Price Elasticity of Demand (PED)</h3>
+          <p>Measures how responsive quantity demanded is to a price change.</p>
+          <div class="formula-box">PED = % Change in Quantity Demanded ÷ % Change in Price</div>
+          <ul>
+            <li>|PED| > 1 → <span class="key-term">Elastic</span> (luxury goods, many substitutes)</li>
+            <li>|PED| &lt; 1 → <span class="key-term">Inelastic</span> (necessities, few substitutes)</li>
+            <li>|PED| = 1 → <span class="key-term">Unit elastic</span></li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>📦 Determinants of Elasticity</h3>
+          <ul>
+            <li>Number of substitutes (more = more elastic)</li>
+            <li>Necessity vs. luxury (necessities = inelastic)</li>
+            <li>Time horizon (longer = more elastic)</li>
+            <li>Proportion of income spent (higher proportion = more elastic)</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>📊 Income Elasticity</h3>
+          <div class="formula-box">YED = % Change in Demand ÷ % Change in Income</div>
+          <ul>
+            <li>YED > 0 → <span class="key-term">Normal good</span> (demand rises with income)</li>
+            <li>YED &lt; 0 → <span class="key-term">Inferior good</span> (demand falls with income)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MARKET STRUCTURES -->
+      <div class="note-section" id="note-micro3">
+        <div class="note-header">
+          <span class="note-tag">Microeconomics</span>
+          <h2>Market Structures</h2>
+        </div>
+        <div class="note-block">
+          <h3>🏆 Perfect Competition</h3>
+          <ul>
+            <li>Many buyers and sellers</li>
+            <li>Identical (homogeneous) products</li>
+            <li>Free entry and exit</li>
+            <li>Price takers — firms have no pricing power</li>
+            <li>Long-run: zero economic profit</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>👑 Monopoly</h3>
+          <ul>
+            <li>Single seller controls the entire market</li>
+            <li>Unique product with no close substitutes</li>
+            <li>High barriers to entry</li>
+            <li>Price maker — sets price above competitive level</li>
+            <li>Results in <span class="key-term">deadweight loss</span></li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>🤝 Oligopoly & Monopolistic Competition</h3>
+          <ul>
+            <li><strong>Oligopoly:</strong> Few large firms, interdependent pricing, high barriers (e.g., airlines, telecom)</li>
+            <li><strong>Monopolistic competition:</strong> Many firms, differentiated products, easy entry/exit (e.g., restaurants)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CONSUMER THEORY -->
+      <div class="note-section" id="note-micro4">
+        <div class="note-header">
+          <span class="note-tag">Microeconomics</span>
+          <h2>Consumer Theory</h2>
+        </div>
+        <div class="note-block">
+          <h3>😊 Utility</h3>
+          <p><span class="key-term">Utility</span> is the satisfaction a consumer gets from a good or service.</p>
+          <ul>
+            <li><strong>Marginal Utility (MU):</strong> Additional satisfaction from consuming one more unit</li>
+            <li><strong>Law of Diminishing Marginal Utility:</strong> Each additional unit consumed gives less additional satisfaction</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>🔄 Substitution & Income Effects</h3>
+          <ul>
+            <li><strong>Substitution effect:</strong> When price rises, consumers switch to cheaper substitutes</li>
+            <li><strong>Income effect:</strong> When price rises, purchasing power falls → buy less</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>🏷️ Price Controls</h3>
+          <ul>
+            <li><span class="key-term">Price ceiling</span>: Maximum legal price (below equilibrium → shortage). E.g., rent control</li>
+            <li><span class="key-term">Price floor</span>: Minimum legal price (above equilibrium → surplus). E.g., minimum wage</li>
+          </ul>
+          <div class="tip-box">💡 Remember: ceilings are below equilibrium (cause shortages), floors are above equilibrium (cause surpluses).</div>
+        </div>
+      </div>
+
+      <!-- GDP -->
+      <div class="note-section" id="note-macro1">
+        <div class="note-header">
+          <span class="note-tag">Macroeconomics</span>
+          <h2>GDP & Economic Growth</h2>
+        </div>
+        <div class="note-block">
+          <h3>📊 Gross Domestic Product (GDP)</h3>
+          <p><span class="key-term">GDP</span> is the total market value of all final goods and services produced in a country in one year.</p>
+          <div class="formula-box">GDP = C + I + G + (X − M)</div>
+          <ul>
+            <li><strong>C</strong> = Consumer spending (largest component ~70%)</li>
+            <li><strong>I</strong> = Investment (business spending on capital)</li>
+            <li><strong>G</strong> = Government spending</li>
+            <li><strong>X − M</strong> = Net exports (exports minus imports)</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>📈 Real vs. Nominal GDP</h3>
+          <ul>
+            <li><span class="key-term">Nominal GDP:</span> Measured in current prices (not adjusted for inflation)</li>
+            <li><span class="key-term">Real GDP:</span> Adjusted for inflation — better measure of actual growth</li>
+          </ul>
+          <div class="formula-box">Real GDP = Nominal GDP ÷ GDP Deflator × 100</div>
+        </div>
+        <div class="note-block">
+          <h3>🔄 Business Cycle</h3>
+          <p>The economy moves through phases: <span class="key-term">Expansion → Peak → Contraction/Recession → Trough → Recovery</span></p>
+          <div class="tip-box">💡 A <strong>recession</strong> is technically two consecutive quarters of negative GDP growth.</div>
+        </div>
+      </div>
+
+      <!-- UNEMPLOYMENT -->
+      <div class="note-section" id="note-macro2">
+        <div class="note-header">
+          <span class="note-tag">Macroeconomics</span>
+          <h2>Unemployment</h2>
+        </div>
+        <div class="note-block">
+          <h3>📉 Types of Unemployment</h3>
+          <ul>
+            <li><span class="key-term">Frictional:</span> Temporarily between jobs (job searching). Normal and healthy.</li>
+            <li><span class="key-term">Structural:</span> Skills mismatch — jobs exist but workers lack required skills</li>
+            <li><span class="key-term">Cyclical:</span> Due to economic downturn/recession. Demand-deficient.</li>
+            <li><span class="key-term">Seasonal:</span> Due to seasonal fluctuations (e.g., ski instructors in summer)</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>📐 Unemployment Rate</h3>
+          <div class="formula-box">Unemployment Rate = (Unemployed ÷ Labor Force) × 100</div>
+          <p><strong>Labor force</strong> = employed + unemployed (actively seeking work). Does NOT include discouraged workers.</p>
+        </div>
+        <div class="note-block">
+          <h3>🎯 Natural Rate of Unemployment</h3>
+          <p>The <span class="key-term">natural rate</span> (NAIRU) = frictional + structural unemployment. Typically around 4–5%. Cyclical unemployment is zero at full employment.</p>
+        </div>
+      </div>
+
+      <!-- INFLATION -->
+      <div class="note-section" id="note-macro3">
+        <div class="note-header">
+          <span class="note-tag">Macroeconomics</span>
+          <h2>Inflation</h2>
+        </div>
+        <div class="note-block">
+          <h3>💵 What is Inflation?</h3>
+          <p><span class="key-term">Inflation</span> is a sustained increase in the general price level. Measured by the <span class="key-term">Consumer Price Index (CPI)</span>.</p>
+          <div class="formula-box">Inflation Rate = [(CPI₂ − CPI₁) ÷ CPI₁] × 100</div>
+        </div>
+        <div class="note-block">
+          <h3>🔥 Types of Inflation</h3>
+          <ul>
+            <li><span class="key-term">Demand-pull:</span> "Too much money chasing too few goods" — driven by increased aggregate demand</li>
+            <li><span class="key-term">Cost-push:</span> Rising input/production costs push prices up (e.g., oil price shock)</li>
+            <li><span class="key-term">Built-in:</span> Wage-price spiral — workers demand higher wages → firms raise prices</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>⚖️ Inflation Effects</h3>
+          <ul>
+            <li>Hurts creditors (lenders) and helps debtors (borrowers)</li>
+            <li>Erodes purchasing power of fixed incomes</li>
+            <li><span class="key-term">Deflation</span> (falling prices) can be dangerous — delays spending</li>
+            <li>The Fed targets ~2% inflation</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MONETARY POLICY -->
+      <div class="note-section" id="note-macro4">
+        <div class="note-header">
+          <span class="note-tag">Macroeconomics</span>
+          <h2>Monetary Policy</h2>
+        </div>
+        <div class="note-block">
+          <h3>🏦 The Federal Reserve</h3>
+          <p>The <span class="key-term">Federal Reserve (Fed)</span> is the central bank of the United States. It controls monetary policy to promote maximum employment and stable prices (dual mandate).</p>
+        </div>
+        <div class="note-block">
+          <h3>🔧 Tools of the Fed</h3>
+          <ul>
+            <li><span class="key-term">Federal funds rate:</span> Interest rate banks charge each other overnight — the Fed's main tool</li>
+            <li><span class="key-term">Open market operations:</span> Buying/selling government securities to adjust money supply</li>
+            <li><span class="key-term">Reserve requirement:</span> Minimum reserves banks must hold</li>
+            <li><span class="key-term">Discount rate:</span> Rate Fed charges banks for direct loans</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>➡️ Expansionary vs. Contractionary</h3>
+          <ul>
+            <li><strong>Expansionary:</strong> Lower rates → increase money supply → stimulate economy (fight recession)</li>
+            <li><strong>Contractionary:</strong> Raise rates → decrease money supply → slow economy (fight inflation)</li>
+          </ul>
+          <div class="tip-box">💡 <strong>Quantitative easing (QE):</strong> Fed buys long-term bonds to inject money — used when rates near zero.</div>
+        </div>
+      </div>
+
+      <!-- FISCAL POLICY -->
+      <div class="note-section" id="note-macro5">
+        <div class="note-header">
+          <span class="note-tag">Macroeconomics</span>
+          <h2>Fiscal Policy</h2>
+        </div>
+        <div class="note-block">
+          <h3>🏛️ What is Fiscal Policy?</h3>
+          <p>Government use of <span class="key-term">taxation</span> and <span class="key-term">spending</span> to influence the economy. Set by Congress and the President.</p>
+        </div>
+        <div class="note-block">
+          <h3>📈 Expansionary vs. Contractionary</h3>
+          <ul>
+            <li><strong>Expansionary:</strong> Increase spending or cut taxes → boost aggregate demand (used in recessions)</li>
+            <li><strong>Contractionary:</strong> Decrease spending or raise taxes → reduce aggregate demand (used against inflation)</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>⚡ Multiplier Effect & Automatic Stabilizers</h3>
+          <ul>
+            <li><span class="key-term">Multiplier:</span> $1 of government spending generates more than $1 in GDP (ripple effect)</li>
+            <li><span class="key-term">Automatic stabilizers:</span> Built-in policies that respond automatically — unemployment insurance, progressive taxes</li>
+          </ul>
+          <div class="tip-box">💡 Fiscal policy has <strong>recognition, decision, and implementation lags</strong>, making it slower than monetary policy.</div>
+        </div>
+      </div>
+
+      <!-- TRADE -->
+      <div class="note-section" id="note-intl1">
+        <div class="note-header">
+          <span class="note-tag">International Economics</span>
+          <h2>Trade & Comparative Advantage</h2>
+        </div>
+        <div class="note-block">
+          <h3>🌐 Comparative vs. Absolute Advantage</h3>
+          <ul>
+            <li><span class="key-term">Absolute advantage:</span> Producing more of a good with the same resources</li>
+            <li><span class="key-term">Comparative advantage:</span> Producing a good at lower opportunity cost — basis for all trade</li>
+          </ul>
+          <div class="tip-box">💡 Even if one country is better at producing everything, both countries gain from specializing in their comparative advantage.</div>
+        </div>
+        <div class="note-block">
+          <h3>🚧 Trade Barriers</h3>
+          <ul>
+            <li><span class="key-term">Tariff:</span> Tax on imports — raises price, protects domestic producers, reduces trade volume</li>
+            <li><span class="key-term">Quota:</span> Limit on quantity of imports</li>
+            <li><span class="key-term">Embargo:</span> Complete ban on trade with a country</li>
+            <li><span class="key-term">Subsidy:</span> Government payment to domestic producers to boost competitiveness</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>📜 Trade Agreements & Organizations</h3>
+          <ul>
+            <li><strong>WTO (World Trade Organization):</strong> Regulates international trade rules</li>
+            <li><strong>USMCA:</strong> US-Mexico-Canada Agreement (replaced NAFTA)</li>
+            <li><strong>Balance of Trade:</strong> Exports − Imports. Positive = trade surplus; Negative = trade deficit</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- EXCHANGE RATES -->
+      <div class="note-section" id="note-intl2">
+        <div class="note-header">
+          <span class="note-tag">International Economics</span>
+          <h2>Exchange Rates</h2>
+        </div>
+        <div class="note-block">
+          <h3>💱 Exchange Rate Basics</h3>
+          <p>An <span class="key-term">exchange rate</span> is the price of one currency in terms of another. Set by supply and demand for currencies in the foreign exchange market.</p>
+        </div>
+        <div class="note-block">
+          <h3>📈 Currency Appreciation & Depreciation</h3>
+          <ul>
+            <li><span class="key-term">Appreciation:</span> Currency gains value → exports become more expensive → imports become cheaper</li>
+            <li><span class="key-term">Depreciation:</span> Currency loses value → exports become cheaper → imports become more expensive</li>
+          </ul>
+          <div class="tip-box">💡 A <strong>strong dollar</strong> = good for American travelers abroad and importers; bad for American exporters.</div>
+        </div>
+        <div class="note-block">
+          <h3>🔄 Fixed vs. Floating Exchange Rates</h3>
+          <ul>
+            <li><strong>Fixed:</strong> Government pegs currency to another (e.g., USD). Stability but less flexibility.</li>
+            <li><strong>Floating:</strong> Determined by market forces. Most major currencies (USD, EUR, JPY) float.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CURRENT EVENTS -->
+      <div class="note-section" id="note-current1">
+        <div class="note-header">
+          <span class="note-tag">Current Events</span>
+          <h2>Key Topics 2024–25</h2>
+        </div>
+        <div class="note-block">
+          <h3>📰 Federal Reserve & Inflation</h3>
+          <ul>
+            <li>The Fed raised rates aggressively in 2022–23 to combat post-pandemic inflation (reached ~9% CPI in 2022)</li>
+            <li>2024: Fed began cutting rates as inflation cooled toward the 2% target</li>
+            <li>Key metric to know: <span class="key-term">PCE (Personal Consumption Expenditures)</span> — the Fed's preferred inflation measure</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>💼 Labor Market</h3>
+          <ul>
+            <li>US unemployment rate stayed relatively low (~3.5–4%) through 2024</li>
+            <li><span class="key-term">Labor force participation rate:</span> % of working-age population working or looking for work</li>
+            <li>Wage growth and "tight" labor markets were major economic topics</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>🌐 Trade & Geopolitics</h3>
+          <ul>
+            <li>US-China trade tensions; tariffs and supply chain reshoring</li>
+            <li><span class="key-term">Nearshoring/Friendshoring:</span> Moving supply chains to nearby or allied countries</li>
+            <li>National debt levels and deficit spending debates</li>
+          </ul>
+        </div>
+        <div class="note-block">
+          <h3>💻 Technology & Economy</h3>
+          <ul>
+            <li>AI and automation impact on labor markets (productivity vs. displacement debate)</li>
+            <li>Semiconductor industry investment (CHIPS Act)</li>
+            <li>Green energy transition economics</li>
+          </ul>
+          <div class="tip-box">💡 For NEC, follow The Wall Street Journal, The Economist, and the Federal Reserve's website for current events prep.</div>
+        </div>
+      </div>
+
+    </div><!-- end study-content -->
+  </div><!-- end study-layout -->
+</div>
+
+<!-- ===== FLASHCARDS ===== -->
+<div class="page" id="page-flashcards">
+  <div class="flashcard-area">
+    <div class="fc-controls">
+      <h2>Flashcards</h2>
+      <select class="fc-category-select" id="fc-cat" onchange="filterCards()">
+        <option value="all">All Topics</option>
+        <option value="micro">Microeconomics</option>
+        <option value="macro">Macroeconomics</option>
+        <option value="intl">International</option>
+        <option value="terms">Key Terms</option>
+      </select>
+    </div>
+    <div class="fc-progress" id="fc-progress">Card 1 of 60</div>
+    <div class="fc-progress-bar"><div class="fc-progress-fill" id="fc-fill" style="width:1.6%"></div></div>
+
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">
+          <div class="fc-label">Question</div>
+          <div class="fc-question" id="fc-q">What is the Law of Demand?</div>
+          <div class="fc-hint">Click to reveal answer</div>
+        </div>
+        <div class="flashcard-back">
+          <div class="fc-label">Answer</div>
+          <div class="fc-answer" id="fc-a">As price <strong>increases</strong>, quantity demanded <strong>decreases</strong> (inverse relationship), all else equal (ceteris paribus). The demand curve slopes downward.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-buttons">
+      <button class="btn btn-ghost" onclick="prevCard()">← Previous</button>
+      <button class="btn btn-primary" onclick="nextCard()">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PRACTICE QUIZ ===== -->
+<div class="page" id="page-quiz">
+  <div class="quiz-area">
+    <div class="quiz-header">
+      <h2>Practice Quiz</h2>
+      <div class="quiz-score-badge" id="score-badge">Score: 0/0</div>
+    </div>
+
+    <div id="quiz-container"></div>
+    <div class="results-panel" id="results-panel">
+      <h3>Quiz Complete! 🎉</h3>
+      <div class="results-score" id="results-score">—</div>
+      <p style="color:var(--muted);margin:0.5rem 0 2rem">questions answered correctly</p>
+      <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
+    </div>
+
+    <div class="quiz-nav" id="quiz-nav">
+      <button class="btn btn-ghost" id="prev-btn" onclick="prevQuestion()" style="display:none">← Back</button>
+      <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" style="display:none">Next Question →</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ===== NAV =====
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tabs button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'quiz') initQuiz();
+}
+
+// ===== NOTES =====
+function showNote(id, el) {
+  document.querySelectorAll('.note-section').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  document.getElementById('note-' + id).classList.add('active');
+  el.classList.add('active');
+}
+
+// ===== FLASHCARDS =====
+const allCards = [
+  // MICRO
+  {cat:'micro', q:'What is the Law of Demand?', a:'As price <strong>increases</strong>, quantity demanded <strong>decreases</strong>. Inverse relationship. Demand curve slopes downward.'},
+  {cat:'micro', q:'What is the Law of Supply?', a:'As price <strong>increases</strong>, quantity supplied <strong>increases</strong>. Positive relationship. Supply curve slopes upward.'},
+  {cat:'micro', q:'What is a market equilibrium?', a:'The point where <strong>quantity demanded = quantity supplied</strong>. No tendency for the price to change.'},
+  {cat:'micro', q:'What causes a shortage in a market?', a:'A <strong>price below equilibrium</strong>: quantity demanded exceeds quantity supplied. Price will rise toward equilibrium.'},
+  {cat:'micro', q:'What causes a surplus in a market?', a:'A <strong>price above equilibrium</strong>: quantity supplied exceeds quantity demanded. Price will fall toward equilibrium.'},
+  {cat:'micro', q:'What is a price ceiling?', a:'A <strong>maximum legal price</strong> set below equilibrium. Causes a shortage. Example: rent control.'},
+  {cat:'micro', q:'What is a price floor?', a:'A <strong>minimum legal price</strong> set above equilibrium. Causes a surplus. Example: minimum wage.'},
+  {cat:'micro', q:'What is price elasticity of demand?', a:'Measures how responsive <strong>quantity demanded</strong> is to a <strong>price change</strong>. PED = %ΔQd ÷ %ΔP'},
+  {cat:'micro', q:'What does elastic demand mean?', a:'|PED| > 1. Quantity demanded is <strong>very responsive</strong> to price changes. Luxury goods with many substitutes.'},
+  {cat:'micro', q:'What does inelastic demand mean?', a:'|PED| < 1. Quantity demanded is <strong>not very responsive</strong> to price changes. Necessities, few substitutes.'},
+  {cat:'micro', q:'What is a normal good?', a:'A good whose demand <strong>increases when income rises</strong>. Income elasticity > 0. Example: new cars, restaurants.'},
+  {cat:'micro', q:'What is an inferior good?', a:'A good whose demand <strong>decreases when income rises</strong>. Income elasticity < 0. Example: instant noodles, bus rides.'},
+  {cat:'micro', q:'What are substitute goods?', a:'Goods that can <strong>replace each other</strong>. A rise in the price of one increases demand for the other. Example: Coke and Pepsi.'},
+  {cat:'micro', q:'What are complementary goods?', a:'Goods consumed <strong>together</strong>. A rise in the price of one decreases demand for the other. Example: cars and gasoline.'},
+  {cat:'micro', q:'What is a monopoly?', a:'A market with <strong>one seller</strong>, no close substitutes, high barriers to entry. The firm is a price maker and earns above-normal profits.'},
+  {cat:'micro', q:'What is perfect competition?', a:'Many buyers and sellers, identical products, free entry/exit. Firms are <strong>price takers</strong> and earn zero economic profit in the long run.'},
+  {cat:'micro', q:'What is an oligopoly?', a:'A market dominated by <strong>a few large firms</strong> with high barriers to entry. Firms are interdependent. Example: airlines, major tech firms.'},
+  {cat:'micro', q:'What is the law of diminishing marginal utility?', a:'Each additional unit consumed provides <strong>less additional satisfaction</strong> than the previous one.'},
+  {cat:'micro', q:'What is deadweight loss?', a:'The <strong>loss of economic efficiency</strong> when equilibrium is not achieved — occurs with monopolies, price controls, and taxes.'},
+  {cat:'micro', q:'What is opportunity cost?', a:'The value of the <strong>next best alternative forgone</strong> when making a decision. The true cost of any choice.'},
+  // MACRO
+  {cat:'macro', q:'What does GDP stand for and measure?', a:'<strong>Gross Domestic Product</strong>. Total market value of all final goods and services produced in a country in one year.'},
+  {cat:'macro', q:'What is the GDP expenditure formula?', a:'<strong>GDP = C + I + G + (X − M)</strong><br>C=Consumption, I=Investment, G=Government, X=Exports, M=Imports'},
+  {cat:'macro', q:'What is the difference between real and nominal GDP?', a:'<strong>Nominal GDP</strong>: measured in current prices. <strong>Real GDP</strong>: adjusted for inflation. Real GDP is a better measure of actual growth.'},
+  {cat:'macro', q:'What is a recession?', a:'Two or more consecutive quarters of <strong>negative GDP growth</strong>. Characterized by falling output, rising unemployment, and lower spending.'},
+  {cat:'macro', q:'What are the phases of the business cycle?', a:'<strong>Expansion → Peak → Contraction/Recession → Trough → Recovery</strong>. The economy naturally moves through these phases.'},
+  {cat:'macro', q:'What is cyclical unemployment?', a:'Unemployment caused by a <strong>downturn in the business cycle</strong>. Demand for workers falls during recessions. Targeted by fiscal/monetary policy.'},
+  {cat:'macro', q:'What is frictional unemployment?', a:'Unemployment from <strong>transitioning between jobs</strong>. Normal and healthy — reflects workers searching for better matches.'},
+  {cat:'macro', q:'What is the natural rate of unemployment?', a:'Frictional + structural unemployment. Typically <strong>~4–5%</strong>. Cyclical unemployment is zero at full employment (NAIRU).'},
+  {cat:'macro', q:'How is the unemployment rate calculated?', a:'<strong>(Unemployed ÷ Labor Force) × 100</strong>. Labor force = employed + unemployed actively seeking work.'},
+  {cat:'macro', q:'What is the Consumer Price Index (CPI)?', a:'A measure of the <strong>average price level</strong> of a basket of consumer goods and services. Used to calculate inflation.'},
+  {cat:'macro', q:'What is demand-pull inflation?', a:'Inflation caused by <strong>excess aggregate demand</strong>. "Too much money chasing too few goods." Common during booms.'},
+  {cat:'macro', q:'What is cost-push inflation?', a:'Inflation caused by <strong>rising production costs</strong> (e.g., oil price spikes). Shifts supply curve left, raising prices.'},
+  {cat:'macro', q:'What is the Federal Reserve?', a:'The <strong>central bank of the United States</strong>. Controls monetary policy with dual mandate: maximum employment + stable prices (2% inflation).'},
+  {cat:'macro', q:'What is the federal funds rate?', a:'The interest rate at which banks lend to each other <strong>overnight</strong>. The Fed\'s primary tool for monetary policy.'},
+  {cat:'macro', q:'What is expansionary monetary policy?', a:'Lowering interest rates / increasing money supply to <strong>stimulate economic growth</strong>. Used during recessions.'},
+  {cat:'macro', q:'What is contractionary monetary policy?', a:'Raising interest rates / decreasing money supply to <strong>reduce inflation</strong>. Slows economic activity.'},
+  {cat:'macro', q:'What is fiscal policy?', a:'Government use of <strong>spending and taxation</strong> to influence the economy. Decided by Congress and the President.'},
+  {cat:'macro', q:'What is expansionary fiscal policy?', a:'<strong>Increasing government spending</strong> or cutting taxes to stimulate aggregate demand. Used during recessions.'},
+  {cat:'macro', q:'What is the multiplier effect?', a:'$1 of government spending creates <strong>more than $1 in total economic output</strong> through repeated rounds of spending.'},
+  {cat:'macro', q:'What are automatic stabilizers?', a:'Built-in fiscal mechanisms that respond automatically to economic changes — e.g., <strong>unemployment insurance, progressive taxes</strong>.'},
+  // INTERNATIONAL
+  {cat:'intl', q:'What is comparative advantage?', a:'The ability to produce a good at a <strong>lower opportunity cost</strong> than others. This is the basis for all mutually beneficial trade.'},
+  {cat:'intl', q:'What is absolute advantage?', a:'The ability to produce <strong>more of a good</strong> with the same resources. Different from comparative advantage.'},
+  {cat:'intl', q:'What is a tariff?', a:'A <strong>tax on imported goods</strong>. Raises the price of imports, protects domestic producers, but reduces trade volume and consumer welfare.'},
+  {cat:'intl', q:'What is a trade quota?', a:'A <strong>limit on the quantity</strong> of a good that can be imported. Restricts supply of imports, raising their price.'},
+  {cat:'intl', q:'What is a trade deficit?', a:'When a country <strong>imports more than it exports</strong> (X < M). Negative net exports. The US runs a persistent trade deficit.'},
+  {cat:'intl', q:'What happens when a country\'s currency appreciates?', a:'Its <strong>exports become more expensive</strong> for foreigners (exports fall) and <strong>imports become cheaper</strong> (imports rise).'},
+  {cat:'intl', q:'What is the WTO?', a:'<strong>World Trade Organization</strong> — sets and enforces rules for international trade, negotiates trade agreements, resolves disputes.'},
+  {cat:'intl', q:'What is USMCA?', a:'<strong>US-Mexico-Canada Agreement</strong> — free trade agreement that replaced NAFTA in 2020. Governs trade among the three countries.'},
+  // KEY TERMS
+  {cat:'terms', q:'What is scarcity?', a:'The fundamental economic problem: <strong>unlimited wants but limited resources</strong>. Forces individuals and societies to make choices.'},
+  {cat:'terms', q:'What is ceteris paribus?', a:'Latin for <strong>"all else equal."</strong> Used in economics to isolate the effect of one variable while holding all others constant.'},
+  {cat:'terms', q:'What is GDP per capita?', a:'GDP <strong>divided by population</strong>. A rough measure of average living standard / economic well-being in a country.'},
+  {cat:'terms', q:'What is aggregate demand?', a:'The <strong>total demand for all goods and services</strong> in an economy at a given price level. Components: C + I + G + NX.'},
+  {cat:'terms', q:'What is the money multiplier?', a:'Shows how much the <strong>money supply expands</strong> from a deposit. = 1 ÷ Reserve Requirement. A 10% reserve rate → multiplier of 10.'},
+  {cat:'terms', q:'What is quantitative easing (QE)?', a:'Fed <strong>purchases long-term assets</strong> (bonds) to inject money into the economy when interest rates are near zero.'},
+  {cat:'terms', q:'What is stagflation?', a:'The combination of <strong>high inflation + high unemployment + slow growth</strong>. Difficult to fix — classic example: US in the 1970s.'},
+  {cat:'terms', q:'What is purchasing power?', a:'The <strong>quantity of goods and services</strong> that can be bought with a unit of currency. Inflation erodes purchasing power.'},
+  {cat:'terms', q:'What is the balance of payments?', a:'A record of all <strong>economic transactions between a country and the rest of the world</strong>. Includes current account and capital account.'},
+  {cat:'terms', q:'What is a budget deficit?', a:'When government <strong>spending exceeds tax revenue</strong> in a given year. Financed by borrowing (issuing Treasury bonds).'},
+];
+
+let filteredCards = [...allCards];
+let currentCard = 0;
+let isFlipped = false;
+
+function filterCards() {
+  const cat = document.getElementById('fc-cat').value;
+  filteredCards = cat === 'all' ? [...allCards] : allCards.filter(c => c.cat === cat);
+  currentCard = 0;
+  isFlipped = false;
+  document.getElementById('flashcard').classList.remove('flipped');
+  updateCard();
+}
+
+function updateCard() {
+  const card = filteredCards[currentCard];
+  document.getElementById('fc-q').innerHTML = card.q;
+  document.getElementById('fc-a').innerHTML = card.a;
+  document.getElementById('fc-progress').textContent = `Card ${currentCard + 1} of ${filteredCards.length}`;
+  document.getElementById('fc-fill').style.width = ((currentCard + 1) / filteredCards.length * 100) + '%';
+  isFlipped = false;
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+
+function flipCard() {
+  isFlipped = !isFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', isFlipped);
+}
+
+function nextCard() {
+  currentCard = (currentCard + 1) % filteredCards.length;
+  updateCard();
+}
+
+function prevCard() {
+  currentCard = (currentCard - 1 + filteredCards.length) % filteredCards.length;
+  updateCard();
+}
+
+// ===== QUIZ =====
+const quizQuestions = [
+  {cat:'Microeconomics', q:'If the price of coffee rises, the demand for tea will most likely:', opts:['Decrease','Increase','Stay the same','Fall to zero'], correct:1, exp:'Coffee and tea are substitute goods. When coffee\'s price rises, consumers switch to tea, increasing demand for tea.'},
+  {cat:'Microeconomics', q:'A price ceiling set BELOW the equilibrium price will cause:', opts:['A surplus','A shortage','No change','The supply curve to shift right'], correct:1, exp:'A price ceiling below equilibrium means price is "too low." Quantity demanded exceeds quantity supplied, creating a shortage.'},
+  {cat:'Microeconomics', q:'Which market structure has the most firms and the least pricing power?', opts:['Monopoly','Oligopoly','Monopolistic competition','Perfect competition'], correct:3, exp:'In perfect competition, many firms sell identical products. No single firm can influence price — they are all price takers.'},
+  {cat:'Microeconomics', q:'The law of diminishing marginal utility states that:', opts:['Each additional unit costs more to produce','Each additional unit provides less additional satisfaction','Prices rise as more is produced','Consumers always want more goods'], correct:1, exp:'As you consume more of a good, each additional unit gives you less extra satisfaction (utility) than the previous one.'},
+  {cat:'Microeconomics', q:'A perfectly inelastic demand curve is:', opts:['Upward sloping','Downward sloping','Horizontal','Vertical'], correct:3, exp:'Perfectly inelastic demand means quantity demanded doesn\'t change regardless of price — it\'s a vertical line.'},
+  {cat:'Microeconomics', q:'If good A and good B are complements, a decrease in the price of A will:', opts:['Decrease demand for B','Increase demand for B','Have no effect on B','Decrease supply of B'], correct:1, exp:'Complements are consumed together (e.g., cars and gas). If A gets cheaper, more A is bought, so demand for B also rises.'},
+  {cat:'Macroeconomics', q:'The largest component of US GDP is:', opts:['Government spending','Investment','Consumer spending','Net exports'], correct:2, exp:'Consumer spending (C) makes up approximately 70% of US GDP, making it by far the largest component.'},
+  {cat:'Macroeconomics', q:'Real GDP differs from nominal GDP because it:', opts:['Includes government transfers','Excludes investment','Is adjusted for inflation','Measures only exports'], correct:2, exp:'Real GDP adjusts for inflation, making it a better measure of actual economic growth over time.'},
+  {cat:'Macroeconomics', q:'A recession is technically defined as:', opts:['Unemployment above 5%','One quarter of negative GDP growth','Two consecutive quarters of negative GDP growth','Inflation above 3%'], correct:2, exp:'The technical definition of a recession is two consecutive quarters (six months) of negative GDP growth.'},
+  {cat:'Macroeconomics', q:'Frictional unemployment refers to workers who are:', opts:['Laid off due to recession','Between jobs and searching','Unable to find work due to skill mismatch','Retired early'], correct:1, exp:'Frictional unemployment is normal transitional unemployment — workers voluntarily between jobs or searching for better ones.'},
+  {cat:'Macroeconomics', q:'If the Fed raises the federal funds rate, this is an example of:', opts:['Expansionary fiscal policy','Contractionary monetary policy','Expansionary monetary policy','Contractionary fiscal policy'], correct:1, exp:'Raising interest rates slows borrowing and spending — this is contractionary monetary policy, typically used to fight inflation.'},
+  {cat:'Macroeconomics', q:'Cost-push inflation is caused by:', opts:['Excessive consumer spending','Rising production costs','Government printing money','Tax cuts'], correct:1, exp:'Cost-push inflation occurs when input/production costs rise (e.g., oil prices spike), forcing producers to raise prices.'},
+  {cat:'Macroeconomics', q:'Which of the following is an automatic stabilizer?', opts:['A new infrastructure bill','A tax cut passed by Congress','Unemployment insurance','A Fed rate cut'], correct:2, exp:'Unemployment insurance automatically pays out during recessions without new legislation — it\'s a built-in stabilizer.'},
+  {cat:'Macroeconomics', q:'The Fed\'s dual mandate includes:', opts:['Maximum employment and 0% inflation','Stable prices and maximum employment','Economic growth and zero deficit','Strong dollar and full employment'], correct:1, exp:'The Federal Reserve\'s dual mandate is to promote maximum employment and maintain stable prices (targeting ~2% inflation).'},
+  {cat:'Macroeconomics', q:'If the government decreases taxes and increases spending during a recession, this is:', opts:['Contractionary fiscal policy','Expansionary monetary policy','Expansionary fiscal policy','Contractionary monetary policy'], correct:2, exp:'Cutting taxes and increasing spending boosts aggregate demand — this is expansionary fiscal policy used to fight recessions.'},
+  {cat:'International', q:'Comparative advantage is best described as:', opts:['Making more of a good than another country','Making a good at a lower opportunity cost','Having better technology','Having more natural resources'], correct:1, exp:'Comparative advantage means producing a good at a lower opportunity cost. This — not absolute production — is the basis for mutually beneficial trade.'},
+  {cat:'International', q:'A tariff on imported steel will most likely:', opts:['Decrease prices for domestic consumers','Help domestic steel producers','Increase steel imports','Lower prices for domestic steel users'], correct:1, exp:'A tariff raises the price of imported steel, reducing competition and benefiting domestic steel producers — but it hurts consumers and industries that use steel.'},
+  {cat:'International', q:'When the US dollar appreciates against the Euro:', opts:['US exports become cheaper for Europeans','US imports from Europe become more expensive','US goods become more expensive for Europeans','The US trade deficit shrinks'], correct:2, exp:'A stronger dollar means foreign buyers need more of their currency to buy dollars. This makes US exports more expensive abroad, potentially reducing exports.'},
+  {cat:'International', q:'A trade deficit means a country:', opts:['Exports more than it imports','Imports more than it exports','Has a budget surplus','Has low unemployment'], correct:1, exp:'A trade deficit = imports > exports. Net exports (X-M) is negative. The US regularly runs a trade deficit.'},
+  {cat:'International', q:'The World Trade Organization (WTO) primarily:', opts:['Sets global interest rates','Regulates international trade rules and resolves disputes','Manages global exchange rates','Provides loans to developing countries'], correct:1, exp:'The WTO sets and enforces rules for international trade, facilitates trade negotiations, and provides a forum for resolving trade disputes between countries.'},
+  {cat:'Microeconomics', q:'Which of the following would shift the supply curve to the RIGHT?', opts:['An increase in input costs','A new government regulation increasing costs','Improved production technology','A decrease in the number of suppliers'], correct:2, exp:'A technological improvement reduces production costs, allowing producers to supply more at every price level — shifting supply right.'},
+  {cat:'Macroeconomics', q:'The Consumer Price Index (CPI) measures:', opts:['The total output of the economy','The average price level of a basket of consumer goods','The stock market performance','Business investment levels'], correct:1, exp:'The CPI tracks the average change in prices paid by urban consumers for a representative basket of goods and services — the main inflation measure.'},
+  {cat:'Macroeconomics', q:'Open market operations refer to the Fed:', opts:['Setting the minimum wage','Buying and selling government securities','Regulating bank mergers','Setting corporate tax rates'], correct:1, exp:'Open market operations — buying and selling Treasury securities — is the Fed\'s most commonly used tool to adjust the money supply.'},
+  {cat:'International', q:'The USMCA is a trade agreement between:', opts:['US, UK, and Canada','US, Mexico, and Canada','US, Brazil, and Mexico','US, Japan, and Canada'], correct:1, exp:'The USMCA (United States-Mexico-Canada Agreement) replaced NAFTA in 2020 and governs trade relations between the three North American countries.'},
+  {cat:'Microeconomics', q:'Which of the following best describes a monopolistically competitive market?', opts:['One firm, unique product, high barriers','Many firms, identical products, free entry','Few large firms, high barriers','Many firms, differentiated products, easy entry'], correct:3, exp:'Monopolistic competition features many firms selling slightly differentiated products (e.g., restaurants) with relatively easy entry and exit.'},
+  {cat:'Macroeconomics', q:'Stagflation is characterized by:', opts:['Low inflation and high growth','High inflation and high growth','High inflation and high unemployment','Low inflation and low unemployment'], correct:2, exp:'Stagflation is the problematic combination of stagnant growth, high inflation, and high unemployment — as seen in the US during the 1970s oil crisis.'},
+  {cat:'Macroeconomics', q:'Which fiscal policy action would most help fight inflation?', opts:['Cut taxes and increase spending','Raise taxes and cut spending','Lower interest rates','Buy Treasury bonds'], correct:1, exp:'Contractionary fiscal policy (raising taxes + cutting spending) reduces aggregate demand, helping cool inflation. The last two options are monetary, not fiscal.'},
+  {cat:'Microeconomics', q:'If income increases and demand for a good decreases, that good is:', opts:['A normal good','A complementary good','A substitute good','An inferior good'], correct:3, exp:'An inferior good is one for which demand decreases as income rises (income elasticity < 0). Examples: instant noodles, used cars.'},
+  {cat:'International', q:'A country has a comparative advantage in a good if it can produce it:', opts:['Using the most labor','At a lower opportunity cost than other countries','At zero monetary cost','With the highest quality'], correct:1, exp:'Comparative advantage is about opportunity cost — not absolute efficiency. A country should specialize in goods with the lowest relative opportunity cost.'},
+  {cat:'Macroeconomics', q:'Which best describes quantitative easing (QE)?', opts:['The Fed raises interest rates sharply','Congress passes a stimulus bill','The Fed buys long-term assets to inject money when rates near zero','The government reduces its debt'], correct:2, exp:'QE involves the Fed purchasing longer-term securities (like mortgage-backed bonds) to lower long-term rates and stimulate the economy when short-term rates are already near zero.'},
+];
+
+let currentQ = 0;
+let answered = [];
+let score = 0;
+
+function initQuiz() {
+  currentQ = 0;
+  answered = new Array(quizQuestions.length).fill(null);
+  score = 0;
+  document.getElementById('results-panel').classList.remove('show');
+  document.getElementById('score-badge').textContent = 'Score: 0/0';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = quizQuestions[currentQ];
+  const isAns = answered[currentQ] !== null;
+  const html = `
+    <div class="question-card">
+      <div class="q-meta">
+        <span class="q-num">Q${currentQ + 1} / ${quizQuestions.length}</span>
+        <span class="q-cat">${q.cat}</span>
+      </div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options">
+        ${q.opts.map((opt, i) => `
+          <div class="q-option ${isAns ? 'disabled' : ''} ${isAns && i === q.correct ? 'correct' : ''} ${isAns && answered[currentQ] === i && i !== q.correct ? 'wrong' : ''}"
+               onclick="${isAns ? '' : `selectAnswer(${i})`}">
+            <span class="q-letter">${String.fromCharCode(65+i)}</span>
+            <span>${opt}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="q-explanation ${isAns ? 'show' : ''}" id="explanation">
+        💡 ${q.exp}
+      </div>
+    </div>
+  `;
+  document.getElementById('quiz-container').innerHTML = html;
+
+  // Nav buttons
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  prevBtn.style.display = currentQ > 0 ? 'block' : 'none';
+  nextBtn.style.display = isAns ? 'block' : 'none';
+  nextBtn.textContent = currentQ < quizQuestions.length - 1 ? 'Next Question →' : 'See Results';
+}
+
+function selectAnswer(i) {
+  answered[currentQ] = i;
+  if (i === quizQuestions[currentQ].correct) score++;
+  const answered_count = answered.filter(a => a !== null).length;
+  document.getElementById('score-badge').textContent = `Score: ${score}/${answered_count}`;
+  renderQuestion();
+}
+
+function nextQuestion() {
+  if (currentQ < quizQuestions.length - 1) {
+    currentQ++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) {
+    currentQ--;
+    renderQuestion();
+  }
+}
+
+function showResults() {
+  document.getElementById('quiz-container').innerHTML = '';
+  document.getElementById('quiz-nav').style.display = 'none';
+  const panel = document.getElementById('results-panel');
+  panel.classList.add('show');
+  const pct = Math.round(score / quizQuestions.length * 100);
+  document.getElementById('results-score').textContent = `${score} / ${quizQuestions.length}`;
+  panel.querySelector('h3').textContent = pct >= 80 ? 'Excellent Work! 🏆' : pct >= 60 ? 'Good Effort! 📈' : 'Keep Studying! 💪';
+}
+
+function restartQuiz() {
+  document.getElementById('quiz-nav').style.display = 'flex';
+  initQuiz();
+}
+
+// Init
+initQuiz();
+</script>
+<div class="credit-badge">created by leon chen</div>
+
+</body>
+</html>
