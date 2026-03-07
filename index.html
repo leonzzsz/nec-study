@@ -117,19 +117,47 @@
  .theme-toggle {
  background: var(--surface2);
  border: 1px solid var(--border);
- color: var(--text);
- width: 34px;
- height: 34px;
- border-radius: 8px;
+ color: var(--muted);
+ height: 32px;
+ padding: 0 0.7rem;
+ border-radius: 99px;
  cursor: pointer;
  display: flex;
  align-items: center;
  justify-content: center;
- font-size: 1rem;
- transition: all 0.2s;
+ gap: 0.4rem;
+ font-size: 0.7rem;
+ font-weight: 500;
+ letter-spacing: 0.03em;
+ transition: all 0.25s;
+ flex-shrink: 0;
+ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+ position: relative;
+ overflow: hidden;
+ }
+ .theme-toggle:hover { background: var(--surface); border-color: color-mix(in srgb, var(--text) 20%, transparent); }
+ .theme-toggle .toggle-track {
+ width: 28px;
+ height: 16px;
+ background: var(--muted);
+ border-radius: 99px;
+ position: relative;
+ transition: background 0.3s;
  flex-shrink: 0;
  }
- .theme-toggle:hover { background: var(--surface); box-shadow: var(--card-shadow); }
+ .theme-toggle .toggle-knob {
+ width: 12px;
+ height: 12px;
+ background: var(--bg);
+ border-radius: 50%;
+ position: absolute;
+ top: 2px;
+ left: 2px;
+ transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+ }
+ [data-theme="dark"] .theme-toggle .toggle-track { background: var(--green); }
+ [data-theme="dark"] .theme-toggle .toggle-knob { transform: translateX(12px); }
+ .toggle-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; }
 
  /* Mobile hamburger */
  .mobile-menu-btn {
@@ -143,9 +171,28 @@
  cursor: pointer;
  align-items: center;
  justify-content: center;
- font-size: 1.1rem;
  flex-shrink: 0;
+ position: relative;
+ transition: all 0.2s;
  }
+ .mobile-menu-btn:hover { background: var(--surface); border-color: color-mix(in srgb, var(--text) 20%, transparent); }
+ .hamburger-line {
+ display: block;
+ width: 16px;
+ height: 1.5px;
+ background: var(--text);
+ border-radius: 2px;
+ transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+ position: absolute;
+ left: 50%;
+ transform: translateX(-50%);
+ }
+ .hamburger-line:nth-child(1) { top: 10px; }
+ .hamburger-line:nth-child(2) { top: 16px; }
+ .hamburger-line:nth-child(3) { top: 22px; }
+ .mobile-menu-btn.open .hamburger-line:nth-child(1) { top: 16px; transform: translateX(-50%) rotate(45deg); }
+ .mobile-menu-btn.open .hamburger-line:nth-child(2) { opacity: 0; }
+ .mobile-menu-btn.open .hamburger-line:nth-child(3) { top: 16px; transform: translateX(-50%) rotate(-45deg); }
 
  /* ===== MAIN ===== */
  main { position: relative; z-index: 1; }
@@ -987,7 +1034,7 @@
  }
 </style>
 </head>
-<body> <nav> <div class="nav-brand">Ricardo <span>Study Hub</span></div> <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">Menu</button> <ul class="nav-center" id="nav-center"> <li><button class="active" onclick="showPage('home', this)">Home</button></li> <li><button onclick="showPage('notes', this)">Study Notes</button></li> <li><button onclick="showPage('flashcards', this)">Flashcards</button></li> <li><button onclick="showPage('quiz', this)">Practice Quiz</button></li> </ul> <div class="nav-right"> <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" id="theme-btn">Dark</button> </div>
+<body> <nav> <div class="nav-brand">Ricardo <span>Study Hub</span></div> <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button> <ul class="nav-center" id="nav-center"> <li><button class="active" onclick="showPage('home', this)">Home</button></li> <li><button onclick="showPage('notes', this)">Study Notes</button></li> <li><button onclick="showPage('flashcards', this)">Flashcards</button></li> <li><button onclick="showPage('quiz', this)">Practice Quiz</button></li> </ul> <div class="nav-right"> <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" id="theme-btn"><span class="toggle-label" id="toggle-label">Dark</span><span class="toggle-track"><span class="toggle-knob"></span></span></button> </div>
 </nav> <main> <!-- ===== HOME ===== -->
 <div class="page active" id="page-home"> <div class="hero"> <div class="hero-badge">NEC · David Ricardo Division</div> <h1>NEC<br><em>Study Guide</em></h1> <p>Everything you need to dominate the National Economics Challenge — study notes, flashcards, and timed practice questions.</p> <div class="hero-cards"> <div class="hero-card" onclick="showPage('notes', document.querySelectorAll('.nav-center button')[1])"> <h3>Study Notes</h3> <p>Core concepts across micro, macro, international economics & current events.</p> </div> <div class="hero-card" onclick="showPage('flashcards', document.querySelectorAll('.nav-center button')[2])">  <h3>Flashcards</h3> <p>60+ cards covering key terms, formulas, and definitions.Flip to reveal.</p> </div> <div class="hero-card" onclick="showPage('quiz', document.querySelectorAll('.nav-center button')[3])"> <h3>Practice Quiz</h3> <p>NEC-style multiple choice questions with instant explanations.</p> </div> </div> <!-- Progress tracker --> <div class="progress-card" id="progress-card"> <h3>Your Progress</h3> <div class="progress-stats"> <div class="progress-stat"> <span class="ps-num" id="ps-cards">0</span> <span class="ps-label">Cards Studied</span> </div> <div class="progress-stat"> <span class="ps-num" id="ps-best">—</span> <span class="ps-label">Best Quiz %</span> </div> <div class="progress-stat"> <span class="ps-num" id="ps-quizzes">0</span> <span class="ps-label">Quizzes Taken</span> </div> </div> </div> <div class="stats-row"> <div class="stat"><span class="stat-num">4</span><span class="stat-label">Topic Areas</span></div> <div class="stat"><span class="stat-num">60+</span><span class="stat-label">Flashcards</span></div> <div class="stat"><span class="stat-num">85</span><span class="stat-label">Practice Qs</span></div> </div> <div style="text-align:center;padding-bottom:3rem;"> <a href="https://econchallenge.unl.edu/Nebraska/Practice" target="_blank" rel="noopener noreferrer" class="practice-link-btn"> Official NEC Practice Test ↗
  </a> </div> </div>
@@ -1029,7 +1076,7 @@ function getTheme() {
 }
 function setTheme(theme) {
  document.documentElement.setAttribute('data-theme', theme);
- document.getElementById('theme-btn').textContent = theme === 'dark' ? 'Light' : 'Dark';
+ document.getElementById('toggle-label').textContent = theme === 'dark' ? 'Light' : 'Dark';
  try { localStorage.setItem('nec-theme', theme); } catch(e) {}
 }
 function toggleTheme() {
@@ -1045,6 +1092,7 @@ try {
 // ===== MOBILE MENU =====
 function toggleMobileMenu() {
  document.getElementById('nav-center').classList.toggle('open');
+ document.getElementById('mobile-menu-btn').classList.toggle('open');
 }
 
 // ===== NAV =====
